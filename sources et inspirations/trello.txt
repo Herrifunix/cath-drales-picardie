@@ -1,0 +1,14 @@
+Créer une application “Les 7 cathédrales de Picardie”
+
+Sur la page d’accueil (CF piece jointe)
+le logo et le titre
+
+un texte de présentation
+
+un bouton “ explorer les cathédrales” > vers un maps avec la position des cathédrales
+
+un bouton “ circuit à vélo” > vers une page circuit à vélo
+
+une série de “cartes” avec “visuel de la cathédrale” + “nom” + “texte” + “En savoir plus” > la page de la-dites cathédrale
+
+Page Cathédrale : cf pièce jointe
