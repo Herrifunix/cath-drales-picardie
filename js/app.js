@@ -69,22 +69,32 @@ function navigateTo(page, param) {
   const navBtn = document.querySelector(`.nav-item[data-page="${page}"]`);
   if (navBtn) navBtn.classList.add('active');
 
-  const backBtn = document.getElementById('btn-back');
+  const homeBrand = document.getElementById('home-brand');
+  const innerBrand = document.getElementById('inner-brand');
+  const menuBtn = document.getElementById('btn-menu');
   const title = document.getElementById('header-title');
 
   if (page === 'home') {
-    backBtn.classList.add('hidden');
+    homeBrand?.classList.remove('hidden');
+    innerBrand?.classList.add('hidden');
+    menuBtn?.classList.remove('hidden');
     title.textContent = 'Les 7 Cathédrales';
   } else if (page === 'map') {
-    backBtn.classList.remove('hidden');
+    homeBrand?.classList.add('hidden');
+    innerBrand?.classList.remove('hidden');
+    menuBtn?.classList.add('hidden');
     title.textContent = 'Carte';
     initMainMap();
   } else if (page === 'velo') {
-    backBtn.classList.remove('hidden');
+    homeBrand?.classList.add('hidden');
+    innerBrand?.classList.remove('hidden');
+    menuBtn?.classList.add('hidden');
     title.textContent = 'Circuit à vélo';
     initVeloMap();
   } else if (page === 'detail') {
-    backBtn.classList.remove('hidden');
+    homeBrand?.classList.add('hidden');
+    innerBrand?.classList.remove('hidden');
+    menuBtn?.classList.add('hidden');
     const cathedral = CATHEDRALS.find(c => c.id === param);
     if (cathedral) {
       title.textContent = cathedral.city;
@@ -115,10 +125,14 @@ function renderCards() {
   const list = DEMO_MODE ? CATHEDRALS.filter(c => DEMO_VISIBLE.includes(c.id)) : CATHEDRALS;
   grid.innerHTML = list.map(c => `
     <div class="card" onclick="navigateTo('detail', '${c.id}')">
-      <div class="card-visual">${c.emoji}</div>
+      <div class="card-visual">
+        <div class="card-title-wrap">
+          <h4>${c.name}</h4>
+          <div class="card-city">&#128205; ${c.city}</div>
+        </div>
+      </div>
       <div class="card-body">
-        <div class="card-name">${c.city}</div>
-        <div class="card-text">${c.shortDesc}</div>
+        <p class="card-text">${c.shortDesc}</p>
         <span class="card-link">En savoir plus</span>
       </div>
     </div>
@@ -281,9 +295,10 @@ renderCards();
 
 // Masquer carte et vélo en mode demo
 if (DEMO_MODE) {
-  document.querySelectorAll('.nav-item[data-page="map"], .nav-item[data-page="velo"]').forEach(el => el.style.display = 'none');
+  document.getElementById('bottom-nav')?.remove();
   document.getElementById('btn-explore')?.remove();
   document.getElementById('btn-velo')?.remove();
+  document.getElementById('btn-velo-highlight')?.remove();
 }
 
 handleHash();
