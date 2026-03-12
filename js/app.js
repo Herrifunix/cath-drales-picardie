@@ -3,6 +3,11 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js');
 }
 
+/* ===== DEMO MODE ===== */
+// Passer à false pour tout afficher
+const DEMO_MODE = true;
+const DEMO_VISIBLE = ['amiens'];
+
 /* ===== INSTALL (optionnel) ===== */
 let deferredPrompt = null;
 
@@ -107,7 +112,8 @@ document.querySelectorAll('.nav-item').forEach(btn => {
 /* ===== RENDER CARDS ===== */
 function renderCards() {
   const grid = document.getElementById('cathedral-cards');
-  grid.innerHTML = CATHEDRALS.map(c => `
+  const list = DEMO_MODE ? CATHEDRALS.filter(c => DEMO_VISIBLE.includes(c.id)) : CATHEDRALS;
+  grid.innerHTML = list.map(c => `
     <div class="card" onclick="navigateTo('detail', '${c.id}')">
       <div class="card-visual">${c.emoji}</div>
       <div class="card-body">
@@ -272,4 +278,12 @@ window.addEventListener('hashchange', handleHash);
 
 /* ===== INIT ===== */
 renderCards();
+
+// Masquer carte et vélo en mode demo
+if (DEMO_MODE) {
+  document.querySelectorAll('.nav-item[data-page="map"], .nav-item[data-page="velo"]').forEach(el => el.style.display = 'none');
+  document.getElementById('btn-explore')?.remove();
+  document.getElementById('btn-velo')?.remove();
+}
+
 handleHash();
