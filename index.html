@@ -38,16 +38,6 @@
         </details>
       </div>
 
-      <!-- Bannière d'installation -->
-      <div id="install-banner" class="install-banner hidden">
-        <p>Installez l'application sur votre téléphone !</p>
-        <button id="btn-install" class="btn-install" onclick="installApp()">
-          <span class="btn-icon">&#128242;</span>
-          Installer l'application
-        </button>
-        <button class="install-dismiss" onclick="dismissInstall()">&times;</button>
-      </div>
-
       <div class="action-buttons">
         <button class="btn-primary" onclick="navigateTo('map')">
           <span class="btn-icon">&#128506;</span>
@@ -61,6 +51,13 @@
 
       <h3 class="section-title">Les cathédrales</h3>
       <div id="cathedral-cards" class="cards-grid"></div>
+
+      <!-- Bouton discret installer (optionnel) -->
+      <div id="install-hint" class="install-hint hidden">
+        <button onclick="installApp()" class="install-hint-btn">
+          &#128242; Ajouter à l'écran d'accueil
+        </button>
+      </div>
     </section>
 
     <!-- PAGE CARTE -->
