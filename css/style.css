@@ -410,6 +410,61 @@ body {
   text-decoration: underline;
 }
 
+/* ===== INSTALL BANNER ===== */
+.install-banner {
+  margin: 0 16px 20px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.08));
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  position: relative;
+  animation: slideDown 0.4s ease-out;
+}
+.install-banner.hidden { display: none; }
+.install-banner p {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  min-width: 140px;
+}
+.btn-install {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--gold), #b8942f);
+  color: var(--dark);
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.15s;
+}
+.btn-install:active { transform: scale(0.96); }
+.install-dismiss {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-size: 1.3rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }

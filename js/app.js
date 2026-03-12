@@ -3,6 +3,60 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js');
 }
 
+/* ===== INSTALL PROMPT ===== */
+let deferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  showInstallBanner();
+});
+
+function showInstallBanner() {
+  const banner = document.getElementById('install-banner');
+  if (banner) banner.classList.remove('hidden');
+}
+
+function installApp() {
+  if (deferredPrompt) {
+    // Navigateurs supportant beforeinstallprompt (Chrome, Edge, Opera desktop, Samsung Internet...)
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
+    document.getElementById('install-banner').classList.add('hidden');
+  } else {
+    // Fallback : instructions manuelles (iOS Safari, Opera Mobile, Firefox...)
+    showInstallInstructions();
+  }
+}
+
+function showInstallInstructions() {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  let msg;
+  if (isIOS) {
+    msg = 'Pour installer :\n\n1. Ouvrez cette page dans Safari\n2. Appuyez sur le bouton Partager (carré avec flèche)\n3. Choisissez « Sur l\'écran d\'accueil »';
+  } else {
+    msg = 'Pour installer :\n\n1. Ouvrez le menu du navigateur (⋮ ou ⋯)\n2. Choisissez « Ajouter à l\'écran d\'accueil » ou « Installer »';
+  }
+  alert(msg);
+}
+
+function dismissInstall() {
+  document.getElementById('install-banner').classList.add('hidden');
+}
+
+// Afficher la bannière au bout de 2s si pas déjà installé
+window.addEventListener('load', () => {
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+  if (!isStandalone) {
+    setTimeout(() => showInstallBanner(), 2000);
+  }
+});
+
+// Masquer si déjà installé
+window.addEventListener('appinstalled', () => {
+  document.getElementById('install-banner').classList.add('hidden');
+});
+
 /* ===== STATE ===== */
 let currentPage = 'home';
 let mainMap = null;
