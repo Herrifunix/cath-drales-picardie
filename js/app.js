@@ -69,35 +69,13 @@ function navigateTo(page, param) {
   const navBtn = document.querySelector(`.nav-item[data-page="${page}"]`);
   if (navBtn) navBtn.classList.add('active');
 
-  const homeBrand = document.getElementById('home-brand');
-  const innerBrand = document.getElementById('inner-brand');
-  const menuBtn = document.getElementById('btn-menu');
-  const title = document.getElementById('header-title');
-
-  if (page === 'home') {
-    homeBrand?.classList.remove('hidden');
-    innerBrand?.classList.add('hidden');
-    menuBtn?.classList.remove('hidden');
-    title.textContent = 'Les 7 Cathédrales';
-  } else if (page === 'map') {
-    homeBrand?.classList.add('hidden');
-    innerBrand?.classList.remove('hidden');
-    menuBtn?.classList.add('hidden');
-    title.textContent = 'Carte';
+  if (page === 'map') {
     initMainMap();
   } else if (page === 'velo') {
-    homeBrand?.classList.add('hidden');
-    innerBrand?.classList.remove('hidden');
-    menuBtn?.classList.add('hidden');
-    title.textContent = 'Circuit à vélo';
     initVeloMap();
   } else if (page === 'detail') {
-    homeBrand?.classList.add('hidden');
-    innerBrand?.classList.remove('hidden');
-    menuBtn?.classList.add('hidden');
     const cathedral = CATHEDRALS.find(c => c.id === param);
     if (cathedral) {
-      title.textContent = cathedral.city;
       renderDetail(cathedral);
     }
   }
@@ -106,11 +84,6 @@ function navigateTo(page, param) {
   window.scrollTo(0, 0);
   window.location.hash = param ? `${page}/${param}` : page;
 }
-
-/* Back button */
-document.getElementById('btn-back').addEventListener('click', () => {
-  navigateTo('home');
-});
 
 /* Bottom nav */
 document.querySelectorAll('.nav-item').forEach(btn => {

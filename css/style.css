@@ -9,7 +9,6 @@
   --paper: #f6f8f7;
   --muted: #6e817a;
   --radius: 14px;
-  --header-height: 72px;
   --nav-height: 64px;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -23,83 +22,8 @@ body {
   color: #ffffff;
   background: linear-gradient(180deg, var(--green-800), var(--green-900));
   min-height: 100dvh;
-  padding-top: calc(var(--header-height) + var(--safe-top));
   padding-bottom: calc(var(--nav-height) + var(--safe-bottom));
   -webkit-font-smoothing: antialiased;
-}
-
-#app-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2000;
-  height: calc(var(--header-height) + var(--safe-top));
-  padding-top: var(--safe-top);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #ffffff;
-  border-bottom: 1px solid rgba(20, 58, 47, 0.08);
-  padding-left: 12px;
-  padding-right: 12px;
-}
-
-.home-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.brand-logo {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  background: var(--green-800);
-  color: var(--gold-400);
-  font-size: 1.3rem;
-}
-
-.brand-text strong {
-  display: block;
-  color: var(--ink);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.65rem;
-  line-height: 1.05;
-}
-
-.brand-text span {
-  display: block;
-  color: var(--muted);
-  font-size: 0.85rem;
-  margin-top: 2px;
-}
-
-.inner-brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-}
-
-#header-title {
-  color: var(--ink);
-  font-size: 1.05rem;
-  font-weight: 700;
-  font-family: Georgia, "Times New Roman", serif;
-}
-
-.header-btn,
-.menu-btn {
-  border: none;
-  background: transparent;
-  color: var(--ink);
-  font-size: 1.35rem;
-  cursor: pointer;
-  padding: 8px;
-  line-height: 1;
 }
 
 .hidden { display: none !important; }
@@ -424,7 +348,7 @@ body {
 
 .map-container {
   width: 100%;
-  height: calc(100dvh - var(--header-height) - var(--nav-height) - var(--safe-top) - var(--safe-bottom));
+  height: calc(100dvh - var(--nav-height) - var(--safe-bottom));
 }
 
 .map-container-small {
