@@ -20,7 +20,24 @@ const CATHEDRALS = [
     ],
     website: 'https://cathedrale-beauvais.fr',
     donUrl: 'https://www.helloasso.com/associations/association-beauvais-cathedrale/formulaires/1',
-    adhesionUrl: 'https://www.helloasso.com/associations/association-beauvais-cathedrale/adhesions/adhesion-classique'
+    adhesionUrl: 'https://www.helloasso.com/associations/association-beauvais-cathedrale/adhesions/adhesion-classique',
+    histoire: [
+      "Commencée en 1225 sous l'impulsion de l'évêque Miles de Nanteuil, la cathédrale Saint-Pierre devait être la plus haute du monde chrétien. La construction du chœur gothique, achevée vers 1272, atteint une hauteur de voûte de 48 mètres — un défi technique sans précédent pour l'époque.",
+      "En 1284, un premier effondrement partiel des voûtes contraint les bâtisseurs à revoir entièrement la structure : les arcs-boutants sont doublés, les piles renforcées. Les travaux reprennent lentement. Le transept est finalement élevé au XVIe siècle, dans un style gothique flamboyant d'une grande richesse décorative.",
+      "En 1573, la flèche centrale s'effondre à son tour, quelques jours après son achèvement, stoppant définitivement toute velléité de construction de la nef. La cathédrale reste ainsi inachevée, sans nef, mais ce \"fragment\" demeure l'un des chefs-d'œuvre absolus de l'architecture médiévale — témoignage poignant des rêves et des limites de ses bâtisseurs."
+    ],
+    chiffres: [
+      { label: 'Hauteur des voûtes', value: '48 m', icon: '📐' },
+      { label: 'Début des travaux', value: '1225', icon: '⚒️' },
+      { label: 'Dials de l\'horloge', value: '52', icon: '🕰️' },
+      { label: 'Pièces de l\'horloge', value: '90 000', icon: '⚙️' },
+      { label: 'Style', value: 'Gothique flamboyant', icon: '🏛️' }
+    ],
+    curiosites: [
+      "L'horloge astronomique (XIXe s.) est l'une des plus complexes du monde : 52 cadrans et 90 000 pièces en font un chef-d'œuvre d'horlogerie.",
+      "Les vitraux flamboyants des fenêtres hautes, datant du XVIe siècle, baignent le chœur d'une lumière colorée unique en Picardie.",
+      "Faute de nef, la cathédrale a utilisé l'ancien transept de la cathédrale carolingienne comme entrée — une singularité architecturale qui lui vaut son plan en forme de T."
+    ]
   },
   {
     id: 'amiens',

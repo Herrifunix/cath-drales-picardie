@@ -6,7 +6,7 @@ if ('serviceWorker' in navigator) {
 /* ===== DEMO MODE ===== */
 // Passer à false pour tout afficher
 const DEMO_MODE = true;
-const DEMO_VISIBLE = ['amiens'];
+const DEMO_VISIBLE = ['amiens', 'beauvais'];
 
 /* ===== INSTALL (optionnel) ===== */
 let deferredPrompt = null;
@@ -198,6 +198,8 @@ function initVeloMap() {
 function renderDetail(c) {
   const container = document.getElementById('detail-content');
 
+  if (detailMap) { detailMap.remove(); detailMap = null; }
+
   let horairesHtml = '';
   if (c.horaires) {
     horairesHtml = c.horaires.map(h =>
@@ -216,64 +218,107 @@ function renderDetail(c) {
       <span class="detail-link-icon">🌐</span> Site officiel
     </a>`;
   }
-  if (c.donUrl) {
-    linksHtml += `<a href="${encodeURI(c.donUrl)}" target="_blank" rel="noopener noreferrer" class="detail-link">
-      <span class="detail-link-icon">❤️</span> Faire un don
-    </a>`;
-  }
   if (c.adhesionUrl) {
     linksHtml += `<a href="${encodeURI(c.adhesionUrl)}" target="_blank" rel="noopener noreferrer" class="detail-link">
       <span class="detail-link-icon">🤝</span> Adhérer à l'association
     </a>`;
   }
 
+  const hasServices = !!(servicesHtml || linksHtml);
+  const donBtn = c.donUrl
+    ? `<a href="${encodeURI(c.donUrl)}" target="_blank" rel="noopener noreferrer" class="btn-don">❤️ Faire un don</a>`
+    : '';
+
+  container.dataset.cathedralId = c.id;
+
   container.innerHTML = `
     <div class="detail-hero">
       <div class="detail-hero-icon">${c.emoji}</div>
       <h2>${c.name}</h2>
-      <div class="detail-city">${c.city}</div>
+      <div class="detail-city">📍 ${c.city}</div>
     </div>
 
-    <div class="detail-section">
-      <h3>📖 Présentation</h3>
-      <p>${c.description}</p>
+    <div class="detail-tab-card">
+      <div class="detail-tabs">
+        <button class="detail-tab-btn active" data-tab="introduction" onclick="switchDetailTab(this)">
+          <span class="detail-tab-icon">⚙️</span> Introduction
+        </button>
+        <button class="detail-tab-btn" data-tab="acces" onclick="switchDetailTab(this)">
+          <span class="detail-tab-icon">📍</span> Accès
+        </button>
+        ${c.horaires ? `<button class="detail-tab-btn" data-tab="horaires" onclick="switchDetailTab(this)">
+          <span class="detail-tab-icon">🕐</span> Horaires
+        </button>` : ''}
+        ${hasServices ? `<button class="detail-tab-btn" data-tab="services" onclick="switchDetailTab(this)">
+          <span class="detail-tab-icon">🎯</span> Services
+        </button>` : ''}
+      </div>
+      ${donBtn}
     </div>
 
-    <div class="detail-section">
-      <h3>📍 Localisation</h3>
-      <p>${c.address}</p>
-      <div id="detail-map-${c.id}" class="detail-map"></div>
+    <div id="tab-introduction" class="detail-tab-panel">
+      <div class="detail-section">
+        <p>${c.description}</p>
+      </div>
+      ${c.chiffres ? `<div class="detail-chiffres">
+        ${c.chiffres.map(f => `<div class="chiffre-item"><span class="chiffre-icon">${f.icon}</span><span class="chiffre-value">${f.value}</span><span class="chiffre-label">${f.label}</span></div>`).join('')}
+      </div>` : ''}
+      ${c.histoire ? `<div class="detail-section detail-section-histoire">
+        <h3>📜 Histoire</h3>
+        ${c.histoire.map(p => `<p>${p}</p>`).join('')}
+      </div>` : ''}
+      ${c.curiosites ? `<div class="detail-section">
+        <h3>💡 À savoir</h3>
+        <ul class="curiosites-list">
+          ${c.curiosites.map(q => `<li>${q}</li>`).join('')}
+        </ul>
+      </div>` : ''}
     </div>
 
-    ${c.horaires ? `<div class="detail-section">
-      <h3>🕐 Horaires</h3>
-      ${horairesHtml}
+    <div id="tab-acces" class="detail-tab-panel hidden">
+      <div class="detail-section">
+        <p>${c.address}</p>
+        <div id="detail-map-${c.id}" class="detail-map"></div>
+      </div>
+    </div>
+
+    ${c.horaires ? `<div id="tab-horaires" class="detail-tab-panel hidden">
+      <div class="detail-section">
+        ${horairesHtml}
+      </div>
     </div>` : ''}
 
-    ${servicesHtml ? `<div class="detail-section">
-      <h3>🎯 Services</h3>
-      ${servicesHtml}
-    </div>` : ''}
-
-    ${linksHtml ? `<div class="detail-section">
-      <h3>🔗 Liens</h3>
-      <div class="detail-links">${linksHtml}</div>
+    ${hasServices ? `<div id="tab-services" class="detail-tab-panel hidden">
+      <div class="detail-section">
+        ${servicesHtml}
+        ${linksHtml ? `<div class="detail-links">${linksHtml}</div>` : ''}
+      </div>
     </div>` : ''}
   `;
+}
 
-  // Mini map for this cathedral
-  setTimeout(() => {
-    if (detailMap) { detailMap.remove(); detailMap = null; }
-    const mapEl = document.getElementById('detail-map-' + c.id);
-    if (mapEl) {
-      detailMap = L.map(mapEl).setView([c.lat, c.lng], 16);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap'
-      }).addTo(detailMap);
-      L.marker([c.lat, c.lng]).addTo(detailMap);
-      detailMap.invalidateSize();
-    }
-  }, 150);
+function switchDetailTab(btn) {
+  document.querySelectorAll('.detail-tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.detail-tab-panel').forEach(p => p.classList.add('hidden'));
+  const tabId = btn.dataset.tab;
+  document.getElementById('tab-' + tabId).classList.remove('hidden');
+
+  if (tabId === 'acces' && !detailMap) {
+    setTimeout(() => {
+      const id = document.getElementById('detail-content').dataset.cathedralId;
+      const cathedral = CATHEDRALS.find(cat => cat.id === id);
+      const mapEl = document.getElementById('detail-map-' + id);
+      if (mapEl && cathedral) {
+        detailMap = L.map(mapEl).setView([cathedral.lat, cathedral.lng], 16);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap'
+        }).addTo(detailMap);
+        L.marker([cathedral.lat, cathedral.lng]).addTo(detailMap);
+        detailMap.invalidateSize();
+      }
+    }, 150);
+  }
 }
 
 /* ===== HASH ROUTING ===== */

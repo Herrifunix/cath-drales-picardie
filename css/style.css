@@ -594,6 +594,129 @@ body {
 .popup-name { color: #f4d57a; font-weight: 700; }
 .popup-link { color: #f4d57a; cursor: pointer; text-decoration: underline; }
 
+/* ===== DETAIL TAB NAVIGATION ===== */
+.detail-tab-card {
+  margin: 0 16px 4px;
+  padding: 16px;
+  background: rgba(0, 63, 47, 0.85);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.detail-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition: color 0.18s, background 0.18s;
+  text-align: left;
+}
+
+.detail-tab-btn.active {
+  color: var(--gold-400);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.detail-tab-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.detail-tab-icon { font-size: 0.85rem; }
+
+.btn-don {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: var(--gold-500);
+  color: #113428;
+  text-align: center;
+  padding: 13px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.btn-don:hover { background: var(--gold-400); }
+
+.detail-tab-panel.hidden { display: none; }
+
+/* ===== CHIFFRES CLÉS ===== */
+.detail-chiffres {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+  margin: 10px 16px 4px;
+}
+
+.chiffre-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 14px 10px;
+  background: rgba(209, 171, 51, 0.08);
+  border: 1px solid rgba(209, 171, 51, 0.25);
+  border-radius: 10px;
+  gap: 4px;
+}
+
+.chiffre-icon { font-size: 1.3rem; }
+.chiffre-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold-400);
+}
+.chiffre-label {
+  font-size: 0.72rem;
+  color: #c0ccc7;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  line-height: 1.3;
+}
+
+/* ===== CURIOSITÉS ===== */
+.curiosites-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.curiosites-list li {
+  padding: 8px 0 8px 24px;
+  position: relative;
+  color: #edf3f0;
+  line-height: 1.6;
+}
+
+.curiosites-list li::before {
+  content: "💡";
+  position: absolute;
+  left: 0;
+  font-size: 0.85rem;
+}
+
+.detail-section-histoire p + p {
+  margin-top: 12px;
+}
+
 @media (min-width: 900px) {
   .cards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
