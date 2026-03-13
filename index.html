@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#c9a84c">
+  <meta name="theme-color" content="#082142">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Les 7 Cathédrales de Picardie</title>
@@ -23,7 +23,7 @@
         <div class="hero-inner">
           <div class="hero-icon">&#9962;</div>
           <h2>Les Sept Cathédrales<br><span>de Picardie</span></h2>
-          <p>Découvrez un patrimoine exceptionnel, témoin de siècles d'histoire, de foi et d'architecture gothique</p>
+          <p>En Picardie, à moins de 60 km à la ronde, s'étend un trésor unique au monde : sept cathédrales, joyaux architecturaux construits entre le XIIe et le XVIe siècle.</p>
 
           <div class="action-buttons">
             <button id="btn-explore" class="btn-primary" onclick="navigateTo('map')">
@@ -37,53 +37,45 @@
           </div>
         </div>
       </div>
-
-      <div class="home-section-title">
-        <h3>Nos Sept Cathédrales</h3>
-        <p>Chaque cathédrale raconte une histoire unique et témoigne de la richesse du patrimoine religieux de la Picardie</p>
-      </div>
-
-      <div id="cathedral-cards" class="cards-grid"></div>
-
-      <section class="velo-highlight">
-        <h3>Parcourez l'Histoire à Vélo</h3>
-        <p>Découvrez un itinéraire cyclable unique reliant les sept cathédrales de Picardie, une aventure culturelle et sportive inoubliable</p>
-        <button id="btn-velo-highlight" class="btn-primary velo-highlight-btn" onclick="navigateTo('velo')">
-          <span class="btn-icon">&#128690;</span>
-          Voir le circuit complet
-        </button>
-      </section>
-
-      <footer class="home-footer">
-        <div class="footer-brand">
-          <div class="footer-logo" aria-hidden="true">&#9962;</div>
-          <div>
-            <h4>Sept Cathédrales de Picardie</h4>
-            <p>Découvrez le patrimoine exceptionnel des sept cathédrales de Picardie, témoins de notre histoire et de notre foi.</p>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h5>Navigation</h5>
-          <p>Accueil</p>
-          <p>Circuit à vélo</p>
-        </div>
-
-        <div class="footer-col">
-          <h5>Contact</h5>
-          <p>Association des Sept Cathédrales</p>
-          <p>Picardie, France</p>
-        </div>
-
-        <div class="footer-copy">© 2025 Association des Sept Cathédrales de Picardie</div>
-      </footer>
-
       <!-- Bouton discret installer (optionnel) -->
       <div id="install-hint" class="install-hint hidden">
         <button onclick="installApp()" class="install-hint-btn">
           &#128242; Ajouter à l'écran d'accueil
         </button>
       </div>
+
+      <section class="home-intro">
+        <p>Noyon, Senlis, Laon, Saint-Quentin, Soissons, Amiens et Beauvais incarnent à elles seules l'âge d'or des cathédrales, cette période où l'Art français, alors nommé « Opus Francigenum », a inspiré toute l'architecture monumentale occidentale.</p>
+        <p>Ce patrimoine, à la fois spirituel, artistique et historique, représente une richesse inestimable pour la région, à découvrir ou à redécouvrir sans modération.</p>
+      </section>
+
+      <div class="home-section-title">
+        <h3>Nos Sept Cathédrales</h3>
+        <p>Découvrez les cathédrales de Picardie et leurs singularités.</p>
+      </div>
+
+      <div id="cathedral-cards" class="cards-grid"></div>
+
+      <section class="velo-highlight">
+        <h3>Parcourez l'Histoire à Vélo</h3>
+        <p>Nous vous proposons des itinéraires cyclables pour relier les sept cathédrales, une aventure culturelle et sportive inoubliable.</p>
+        <button id="btn-velo-highlight" class="btn-primary velo-highlight-btn" onclick="navigateTo('velo')">
+          <span class="btn-icon">&#128690;</span>
+          FÉDÉRATION DES ASSOCIATIONS DES AMIS DES CATHÉDRALES ET DES ORGUES DES CATHÉDRALES PICARDES
+        </button>
+      </section>
+
+      <section class="federation-section">
+        <h3>FÉDÉRATION DES ASSOCIATIONS DES AMIS DES CATHÉDRALES ET DES ORGUES DES CATHÉDRALES PICARDES</h3>
+        <h4>Notre mission :</h4>
+        <p>Nous fédérons les associations engagées dans la valorisation du patrimoine culturel, historique et artistique, notamment architectural, des cathédrales, véritables joyaux de notre héritage. Notre mission est de promouvoir leur rayonnement en mettant en lumière leur dimension spirituelle, tout en respectant la singularité cultuelle de ces lieux et la diversité de nos membres.</p>
+        <p>Pour y parvenir, nous encourageons les collaborations, les échanges d'expériences et la réalisation de projets communs entre les associations qui composent notre réseau. Ensemble, nous agissons dans un esprit de partage et de respect mutuel, sans aucune visée lucrative.</p>
+        <p class="federation-rna">RNA W603003716</p>
+      </section>
+
+      <footer class="home-footer">
+        <div class="footer-copy">© 2026 Association des Sept Cathédrales de Picardie</div>
+      </footer>
     </section>
 
     <!-- PAGE CARTE -->

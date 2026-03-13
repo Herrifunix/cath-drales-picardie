@@ -202,9 +202,14 @@ function renderDetail(c) {
   }
 
   const hasServices = !!(servicesHtml || linksHtml);
-  const donBtn = c.donUrl
-    ? `<a href="${encodeURI(c.donUrl)}" target="_blank" rel="noopener noreferrer" class="btn-don">❤️ Faire un don</a>`
-    : '';
+  const hasAssociation = !!(c.donUrl || c.adhesionUrl);
+  let associationActionsHtml = '';
+  if (c.donUrl) {
+    associationActionsHtml += `<a href="${encodeURI(c.donUrl)}" target="_blank" rel="noopener noreferrer" class="btn-don">❤️ Faire un don</a>`;
+  }
+  if (c.adhesionUrl) {
+    associationActionsHtml += `<a href="${encodeURI(c.adhesionUrl)}" target="_blank" rel="noopener noreferrer" class="btn-asso">🤝 Adhérer à l'association</a>`;
+  }
   const detailGeoHref = `geo:${c.lat},${c.lng}?q=${encodeURIComponent(`${c.name}, ${c.city}`)}`;
 
   container.dataset.cathedralId = c.id;
@@ -230,8 +235,10 @@ function renderDetail(c) {
         ${hasServices ? `<button class="detail-tab-btn" data-tab="services" onclick="switchDetailTab(this)">
           <span class="detail-tab-icon">🎯</span> Services
         </button>` : ''}
+        ${hasAssociation ? `<button class="detail-tab-btn" data-tab="association" onclick="switchDetailTab(this)">
+          <span class="detail-tab-icon">🤝</span> Association
+        </button>` : ''}
       </div>
-      ${donBtn}
     </div>
 
     <div id="tab-introduction" class="detail-tab-panel">
@@ -271,6 +278,15 @@ function renderDetail(c) {
       <div class="detail-section">
         ${servicesHtml}
         ${linksHtml ? `<div class="detail-links">${linksHtml}</div>` : ''}
+      </div>
+    </div>` : ''}
+
+    ${hasAssociation ? `<div id="tab-association" class="detail-tab-panel hidden">
+      <div class="detail-section">
+        <h3>🤝 Présentation de l'association</h3>
+        <p>Notre association a pour vocation de valoriser la cathédrale Saint-Pierre, la basse-œuvre et l’église Saint-Étienne de Beauvais, dans une démarche résolument culturelle. Nous animons ces édifices emblématiques en veillant à respecter le culte catholique, conformément à la loi du 9 décembre 1905, ainsi que l’héritage patrimonial qu’ils incarnent.</p>
+        <p>Vous pouvez soutenir nos actions en faisant un don ou en adhérant.</p>
+        <div class="association-actions">${associationActionsHtml}</div>
       </div>
     </div>` : ''}
   `;

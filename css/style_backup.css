@@ -1,11 +1,11 @@
 :root {
-  --green-900: #04152e;
-  --green-800: #082142;
-  --green-700: #113259;
-  --green-500: #1f4a7c;
+  --green-900: #003f2f;
+  --green-800: #00523a;
+  --green-700: #0b6a4f;
+  --green-500: #2f7d62;
   --gold-500: #d1ab33;
   --gold-400: #e5c45e;
-  --ink: #0a1629;
+  --ink: #143a2f;
   --paper: #f6f8f7;
   --muted: #6e817a;
   --radius: 14px;
@@ -37,7 +37,7 @@ body {
   height: calc(var(--nav-height) + var(--safe-bottom));
   padding-bottom: var(--safe-bottom);
   background: #ffffff;
-  border-top: 1px solid rgba(10, 22, 41, 0.2);
+  border-top: 1px solid rgba(20, 58, 47, 0.12);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -46,7 +46,7 @@ body {
 .nav-item {
   border: none;
   background: transparent;
-  color: #6b777e;
+  color: #6b7e77;
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -68,13 +68,13 @@ body {
 }
 
 #page-home {
-  background: linear-gradient(180deg, #051e3e 0%, #041935 65%, #03132b 100%);
+  background: linear-gradient(180deg, #004a37 0%, #00422f 65%, #003725 100%);
 }
 
 .hero {
   position: relative;
   padding: 50px 12px 36px;
-  background-image: linear-gradient(180deg, rgba(4, 21, 46, 0.35), rgba(4, 21, 46, 0.78)), url("../sources et inspirations/7cath-accueil.png");
+  background-image: linear-gradient(180deg, rgba(0, 63, 47, 0.35), rgba(0, 63, 47, 0.78)), url("../sources et inspirations/7cath-accueil.png");
   background-size: cover;
   background-position: center;
 }
@@ -82,7 +82,7 @@ body {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(4, 21, 46, 0.35) 0%, rgba(4, 21, 46, 0.86) 88%);
+  background: linear-gradient(180deg, rgba(0, 63, 47, 0.35) 0%, rgba(0, 63, 47, 0.86) 88%);
 }
 
 .hero-inner {
@@ -103,7 +103,7 @@ body {
   display: grid;
   place-items: center;
   font-size: 2.1rem;
-  background: rgba(4, 21, 46, 0.52);
+  background: rgba(0, 54, 40, 0.52);
 }
 
 .hero h2 {
@@ -122,19 +122,6 @@ body {
   color: #e5cd7f;
   font-size: clamp(1.02rem, 3.1vw, 1.6rem);
   line-height: 1.45;
-}
-
-.home-intro {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 26px 18px 8px;
-}
-
-.home-intro p {
-  margin: 0 0 14px;
-  color: #e5edf7;
-  line-height: 1.65;
-  font-size: 1.05rem;
 }
 
 .action-buttons {
@@ -160,7 +147,7 @@ body {
 
 .btn-primary {
   background: var(--gold-500);
-  color: #081b33;
+  color: #113428;
 }
 
 .btn-secondary {
@@ -203,7 +190,7 @@ body {
   overflow: hidden;
   background: #ffffff;
   cursor: pointer;
-  border: 1px solid rgba(4, 21, 46, 0.16);
+  border: 1px solid rgba(0, 50, 35, 0.12);
 }
 
 .card-visual {
@@ -213,7 +200,7 @@ body {
   align-items: flex-end;
   justify-content: flex-start;
   padding: 18px;
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(17, 50, 89, 0.9) 85%), url("../sources et inspirations/7cath-amiens-info.png");
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(27, 109, 86, 0.9) 85%), url("../sources et inspirations/7cath-amiens-info.png");
   background-size: cover;
   background-position: center;
 }
@@ -222,7 +209,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 8%, rgba(17, 50, 89, 0.75) 76%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 8%, rgba(25, 101, 81, 0.75) 76%);
 }
 
 .card-title-wrap {
@@ -263,7 +250,7 @@ body {
 .card-link {
   display: inline-block;
   margin-top: 14px;
-  color: #143763;
+  color: #1f5e4b;
   font-weight: 700;
   text-decoration: none;
   font-size: 1rem;
@@ -280,7 +267,7 @@ body {
   border-top: 1px solid rgba(210, 190, 120, 0.45);
   border-bottom: 1px solid rgba(210, 190, 120, 0.45);
   text-align: center;
-  background: linear-gradient(90deg, rgba(4, 21, 46, 0.9), rgba(8, 33, 66, 0.9));
+  background: linear-gradient(90deg, rgba(0, 54, 40, 0.9), rgba(2, 71, 50, 0.9));
 }
 
 .velo-highlight h3 {
@@ -301,48 +288,11 @@ body {
 .velo-highlight-btn {
   width: min(100%, 420px);
   margin: 24px auto 0;
-  font-size: 1rem;
-  line-height: 1.35;
-  white-space: normal;
-}
-
-.federation-section {
-  margin: 18px 12px 0;
-  padding: 26px 18px;
-  border-radius: var(--radius);
-  border: 1px solid rgba(229, 196, 94, 0.35);
-  background: rgba(4, 21, 46, 0.58);
-}
-
-.federation-section h3 {
-  margin: 0;
-  color: var(--gold-500);
-  font-size: clamp(1.1rem, 3.4vw, 1.35rem);
-  line-height: 1.35;
-}
-
-.federation-section h4 {
-  margin: 18px 0 8px;
-  color: #f0d889;
-  font-size: 1.08rem;
-}
-
-.federation-section p {
-  margin: 0 0 14px;
-  color: #e8edf6;
-  line-height: 1.65;
-}
-
-.federation-rna {
-  margin-bottom: 0;
-  color: #f4d57a;
-  font-weight: 700;
-  letter-spacing: 0.3px;
 }
 
 .home-footer {
   margin-top: 34px;
-  background: #02122b;
+  background: #003526;
   padding: 26px 12px 22px;
   border-top: 1px solid rgba(225, 209, 140, 0.3);
 }
@@ -557,13 +507,13 @@ body {
 }
 
 .leaflet-popup-content-wrapper {
-  background: #061e3d !important;
+  background: #0c4a38 !important;
   color: #ffffff !important;
   border-radius: 10px !important;
   border: 1px solid rgba(209, 171, 51, 0.35) !important;
 }
 
-.leaflet-popup-tip { background: #061e3d !important; }
+.leaflet-popup-tip { background: #0c4a38 !important; }
 .leaflet-popup-content { margin: 12px 16px !important; }
 .popup-name { color: #f4d57a; font-weight: 700; }
 .popup-link { color: #f4d57a; cursor: pointer; text-decoration: underline; }
@@ -581,7 +531,7 @@ body {
   padding: 8px 10px;
   border-radius: 8px;
   background: var(--gold-500);
-  color: #081b33;
+  color: #113428;
   text-decoration: none;
   font-size: 0.85rem;
   font-weight: 700;
@@ -591,7 +541,7 @@ body {
 .detail-tab-card {
   margin: 0 16px 4px;
   padding: 16px;
-  background: rgba(4, 21, 46, 0.85);
+  background: rgba(0, 63, 47, 0.85);
   border-radius: var(--radius);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -608,8 +558,7 @@ body {
   align-items: center;
   gap: 6px;
   background: transparent;
-  border: 1px solid rgba(229, 196, 94, 0.5);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  border: none;
   color: rgba(255, 255, 255, 0.55);
   font-size: 0.82rem;
   cursor: pointer;
@@ -622,8 +571,6 @@ body {
 .detail-tab-btn.active {
   color: var(--gold-400);
   background: rgba(255, 255, 255, 0.07);
-  border: 1px solid var(--gold-400);
-  box-shadow: inset 0 0 0 1px rgba(229, 196, 94, 0.2);
 }
 
 .detail-tab-btn:hover {
@@ -639,52 +586,18 @@ body {
   justify-content: center;
   gap: 8px;
   width: 100%;
-  background: transparent;
-  color: var(--gold-400);
+  background: var(--gold-500);
+  color: #113428;
   text-align: center;
   padding: 13px;
   border-radius: 8px;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   font-size: 0.95rem;
   transition: background 0.2s;
 }
 
-.btn-don:hover { background: rgba(209, 171, 51, 0.08); }
-
-.association-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 14px;
-}
-
-.btn-asso {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  background: rgba(209, 171, 51, 0.12);
-  color: var(--gold-400);
-  text-align: center;
-  padding: 13px;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: background 0.2s;
-}
-
-.btn-asso:hover {
-  background: rgba(209, 171, 51, 0.2);
-}
-
-@media (max-width: 560px) {
-  .association-actions {
-    grid-template-columns: 1fr;
-  }
-}
+.btn-don:hover { background: var(--gold-400); }
 
 .detail-tab-panel.hidden { display: none; }
 
@@ -698,7 +611,7 @@ body {
   padding: 12px;
   border-radius: 8px;
   background: rgba(209, 171, 51, 0.95);
-  color: #081b33;
+  color: #113428;
   font-weight: 700;
   text-decoration: none;
 }
@@ -780,5 +693,3 @@ body {
   .btn-primary,
   .btn-secondary { font-size: 1.15rem; }
 }
-
-
