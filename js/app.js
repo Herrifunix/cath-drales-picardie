@@ -179,9 +179,13 @@ function renderDetail(c) {
 
   let horairesHtml = '';
   if (c.horaires) {
+    const horairesNoteHtml = c.horairesNote
+      ? `<p class="horaires-note"><strong>${c.horairesNote}</strong></p>`
+      : '';
     horairesHtml = c.horaires.map(h =>
       `<p><strong>${h.periode}</strong><br>${h.detail}</p>`
     ).join('');
+    horairesHtml = `${horairesNoteHtml}${horairesHtml}`;
   }
 
   let servicesHtml = '';
@@ -190,16 +194,30 @@ function renderDetail(c) {
   }
 
   let linksHtml = '';
+  const serviceLinkClass = c.centerServicesLinks ? 'detail-link centered' : 'detail-link';
   if (c.website) {
-    linksHtml += `<a href="${encodeURI(c.website)}" target="_blank" rel="noopener noreferrer" class="detail-link">
+    linksHtml += `<a href="${encodeURI(c.website)}" target="_blank" rel="noopener noreferrer" class="${serviceLinkClass}">
       <span class="detail-link-icon">🌐</span> Site officiel
     </a>`;
   }
   if (c.adhesionUrl) {
-    linksHtml += `<a href="${encodeURI(c.adhesionUrl)}" target="_blank" rel="noopener noreferrer" class="detail-link">
+    linksHtml += `<a href="${encodeURI(c.adhesionUrl)}" target="_blank" rel="noopener noreferrer" class="${serviceLinkClass}">
       <span class="detail-link-icon">🤝</span> Adhérer à l'association
     </a>`;
   }
+  if (c.phone) {
+    linksHtml += `<a href="tel:${c.phone.replace(/\s+/g, '')}" class="${serviceLinkClass}">
+      <span class="detail-link-icon">📞</span> ${c.phone}
+    </a>`;
+  }
+
+  const presentationBlock = c.presentationImage
+    ? `<div class="detail-section detail-presentation">
+        <h3>${c.presentationTitle || 'Introduction'}</h3>
+        <img class="detail-presentation-image" src="${encodeURI(c.presentationImage)}" alt="Visuel de présentation - ${c.name}" loading="lazy">
+        ${c.presentationCreditHtml ? `<p class="detail-presentation-credit">${c.presentationCreditHtml}</p>` : ''}
+      </div>`
+    : '';
 
   const hasServices = !!(servicesHtml || linksHtml);
   const hasAssociation = !!(c.donUrl || c.adhesionUrl);
@@ -242,6 +260,7 @@ function renderDetail(c) {
     </div>
 
     <div id="tab-introduction" class="detail-tab-panel">
+      ${presentationBlock}
       <div class="detail-section">
         <p>${c.description}</p>
       </div>
@@ -262,7 +281,7 @@ function renderDetail(c) {
 
     <div id="tab-acces" class="detail-tab-panel hidden">
       <div class="detail-section">
-        <p>${c.address}</p>
+        <p><strong>Adresse :</strong> ${c.address}</p>
         <a class="detail-nav-btn" href="${detailGeoHref}">🧭 Naviguer vers cette cathédrale</a>
         <div id="detail-map-${c.id}" class="detail-map"></div>
       </div>

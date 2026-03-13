@@ -6,37 +6,43 @@ const CATHEDRALS = [
     lat: 49.4326,
     lng: 2.0815,
     emoji: '🏛️',
-    shortDesc: "Chef-d'œuvre gothique inachevé, la cathédrale de Beauvais impressionne par son chœur le plus haut de la chrétienté (48 mètres).",
-    description: "Chef-d'œuvre gothique inachevé, la cathédrale de Beauvais impressionne par son chœur le plus haut de la chrétienté (48 mètres) et ses vitraux flamboyants, véritables joyaux de lumière. Symbole d'audace médiévale, sa construction, marquée par des effondrements, témoigne de la quête de transcendance des bâtisseurs.",
+    shortDesc: "Chef-d'œuvre gothique inachevé, la cathédrale de Beauvais impressionne par son chœur le plus haut de la chrétienté (48 mètres) et ses deux horloges astronomiques.",
+    description: "Chef-d'œuvre gothique inachevé, la cathédrale de Beauvais impressionne par son chœur le plus haut de la chrétienté (48 mètres) et ses deux horloges astronomiques. Symbole d'audace, sa construction, marquée par des effondrements, témoigne de la quête de transcendance des bâtisseurs.",
+    presentationTitle: 'Introduction - Présentation',
+    presentationImage: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cath%C3%A9drale_Saint-Pierre_de_Beauvais_(1).jpg',
+    presentationCreditHtml: 'Crédit : Par <a href="//commons.wikimedia.org/wiki/User:Baidax" title="User:Baidax">Baidax</a> — <span class="int-own-work" lang="fr">Travail personnel</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=94632818">Lien</a>',
     address: 'Rue Saint-Pierre, 60000 BEAUVAIS',
+    horairesNote: "L'Association Beauvais Cathédrale ouvre la cathédrale tous les jours de l'année (sauf exception).",
     horaires: [
       { periode: 'Du 1ᵉʳ novembre au 31 mars', detail: 'Tous les jours de 10 h à 12 h 15 et de 14 h 00 à 17 h 15' },
       { periode: 'Du 1ᵉʳ avril au 31 octobre', detail: 'Tous les jours de 10 h à 18 h 15' }
     ],
     services: [
-      "Visite de l'horloge astronomique",
-      'Audio guide',
+      "Son et lumière de l'horloge astronomique Vérité",
+      "Location d'audio guides",
       'Accès PMR'
     ],
     website: 'https://cathedrale-beauvais.fr',
     donUrl: 'https://www.helloasso.com/associations/association-beauvais-cathedrale/formulaires/1',
     adhesionUrl: 'https://www.helloasso.com/associations/association-beauvais-cathedrale/adhesions/adhesion-classique',
+    phone: '03 44 48 11 60',
+    centerServicesLinks: true,
     histoire: [
-      "Commencée en 1225 sous l'impulsion de l'évêque Miles de Nanteuil, la cathédrale Saint-Pierre devait être la plus haute du monde chrétien. La construction du chœur gothique, achevée vers 1272, atteint une hauteur de voûte de 48 mètres — un défi technique sans précédent pour l'époque.",
-      "En 1284, un premier effondrement partiel des voûtes contraint les bâtisseurs à revoir entièrement la structure : les arcs-boutants sont doublés, les piles renforcées. Les travaux reprennent lentement. Le transept est finalement élevé au XVIe siècle, dans un style gothique flamboyant d'une grande richesse décorative.",
-      "En 1573, la flèche centrale s'effondre à son tour, quelques jours après son achèvement, stoppant définitivement toute velléité de construction de la nef. La cathédrale reste ainsi inachevée, sans nef, mais ce \"fragment\" demeure l'un des chefs-d'œuvre absolus de l'architecture médiévale — témoignage poignant des rêves et des limites de ses bâtisseurs."
+      "Commencée en 1225 sous l'impulsion de l'évêque-comte Milon de Nanteuil, la cathédrale Saint-Pierre devait être la plus haute du monde chrétien. La construction du chœur gothique, achevée vers 1272, atteint une hauteur de voûte de 48 mètres, un défi technique sans précédent pour l'époque.",
+      "En 1284, un premier effondrement partiel des voûtes contraint les bâtisseurs à revoir entièrement la structure : les arcs-boutants sont doublés, les piles renforcées et des piliers intermédiaires, plus étroits, sont ajoutés pour diviser les travées existantes. Les travaux, ralentis par la guerre de Cent Ans et la peste, ne reprennent qu'autour de 1500. Le transept est finalement élevé au XVIe siècle, dans un style gothique flamboyant d'une grande richesse décorative.",
+      "En 1573, la flèche centrale tour-lanterne, conçue pour rivaliser avec Saint-Pierre de Rome, s'effondre à son tour, quelques années après son achèvement, stoppant définitivement toute velléité de construction de la nef. La cathédrale reste ainsi inachevée, avec seulement une travée de nef, mais ce fragment demeure l'un des chefs-d'œuvre absolus de l'architecture médiévale. Cet inachèvement a aussi permis de préserver une partie de l'ancienne cathédrale carolingienne, vestige inestimable du Xe siècle."
     ],
     chiffres: [
       { label: 'Hauteur des voûtes', value: '48 m', icon: '📐' },
+      { label: 'Cadrans (horloge Vérité)', value: '53', icon: '🕰️' },
       { label: 'Début des travaux', value: '1225', icon: '⚒️' },
-      { label: 'Dials de l\'horloge', value: '52', icon: '🕰️' },
-      { label: 'Pièces de l\'horloge', value: '90 000', icon: '⚙️' },
-      { label: 'Style', value: 'Gothique flamboyant', icon: '🏛️' }
+      { label: '', value: 'Gothique rayonnant et flamboyant', icon: '🏛️' },
+      { label: 'Horloges astronomiques', value: '2', icon: '⏳' }
     ],
     curiosites: [
-      "L'horloge astronomique (XIXe s.) est l'une des plus complexes du monde : 52 cadrans et 90 000 pièces en font un chef-d'œuvre d'horlogerie.",
-      "Les vitraux flamboyants des fenêtres hautes, datant du XVIe siècle, baignent le chœur d'une lumière colorée unique en Picardie.",
-      "Faute de nef, la cathédrale a utilisé l'ancien transept de la cathédrale carolingienne comme entrée — une singularité architecturale qui lui vaut son plan en forme de T."
+      "La cathédrale accueille deux horloges astronomiques : l'horloge astronomique Vérité du XIXe siècle, l'une des plus complexes du monde (53 cadrans et 90 000 pièces), et l'horloge du chanoine Musique du XIVe siècle.",
+      "Les vitraux s'échelonnent du XIIIe au XXe siècle. Les vitraux flamboyants des fenêtres hautes du XVIe siècle baignent le chœur d'une lumière colorée unique en Picardie.",
+      "Faute de nef, la cathédrale a utilisé l'ancien transept de la cathédrale carolingienne comme entrée, une singularité architecturale qui lui vaut son plan en forme de T."
     ]
   },
   {
