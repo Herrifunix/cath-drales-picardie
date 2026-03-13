@@ -131,10 +131,14 @@ function initMainMap() {
 
     CATHEDRALS.forEach(c => {
       const marker = L.marker([c.lat, c.lng], { icon: goldIcon }).addTo(mainMap);
+      const geoHref = `geo:${c.lat},${c.lng}?q=${encodeURIComponent(`${c.name}, ${c.city}`)}`;
       marker.bindPopup(`
         <div class="popup-name">${c.city}</div>
         <div style="font-size:0.85rem;color:#ccc;margin:4px 0;">${c.name}</div>
-        <span class="popup-link" onclick="navigateTo('detail','${c.id}')">Voir la fiche →</span>
+        <div class="popup-actions">
+          <span class="popup-link" onclick="navigateTo('detail','${c.id}')">Voir la fiche →</span>
+          <a class="popup-nav-btn" href="${geoHref}">Naviguer</a>
+        </div>
       `);
     });
 
@@ -201,6 +205,7 @@ function renderDetail(c) {
   const donBtn = c.donUrl
     ? `<a href="${encodeURI(c.donUrl)}" target="_blank" rel="noopener noreferrer" class="btn-don">❤️ Faire un don</a>`
     : '';
+  const detailGeoHref = `geo:${c.lat},${c.lng}?q=${encodeURIComponent(`${c.name}, ${c.city}`)}`;
 
   container.dataset.cathedralId = c.id;
 
@@ -251,6 +256,7 @@ function renderDetail(c) {
     <div id="tab-acces" class="detail-tab-panel hidden">
       <div class="detail-section">
         <p>${c.address}</p>
+        <a class="detail-nav-btn" href="${detailGeoHref}">🧭 Naviguer vers cette cathédrale</a>
         <div id="detail-map-${c.id}" class="detail-map"></div>
       </div>
     </div>
