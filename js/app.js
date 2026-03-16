@@ -221,6 +221,7 @@ function renderDetail(c) {
 
   const hasServices = !!(servicesHtml || linksHtml);
   const hasAssociation = !!(c.donUrl || c.adhesionUrl);
+  const hasAgenda = !!c.agendaCalendarUrl;
   let associationActionsHtml = '';
   if (c.donUrl) {
     associationActionsHtml += `<a href="${encodeURI(c.donUrl)}" target="_blank" rel="noopener noreferrer" class="btn-don">❤️ Faire un don</a>`;
@@ -255,6 +256,9 @@ function renderDetail(c) {
         </button>` : ''}
         ${hasAssociation ? `<button class="detail-tab-btn" data-tab="association" onclick="switchDetailTab(this)">
           <span class="detail-tab-icon">🤝</span> Association
+        </button>` : ''}
+        ${hasAgenda ? `<button class="detail-tab-btn" data-tab="agenda" onclick="switchDetailTab(this)">
+          <span class="detail-tab-icon">📅</span> Agenda
         </button>` : ''}
       </div>
     </div>
@@ -308,7 +312,18 @@ function renderDetail(c) {
         <div class="association-actions">${associationActionsHtml}</div>
       </div>
     </div>` : ''}
-  `;
+    ${hasAgenda ? `<div id="tab-agenda" class="detail-tab-panel hidden">
+      <div class="detail-section">
+        <h3>📅 Agenda des événements</h3>
+        <p class="agenda-intro">Retrouvez ici les prochains événements, messes, concerts et visites organisés par la cathédrale.</p>
+        <iframe
+          class="agenda-iframe"
+          src="${encodeURI(c.agendaCalendarUrl)}&showTitle=0&showNav=1&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=AGENDA&hl=fr"
+          title="Agenda de ${c.name}"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>` : ''}  `;
 }
 
 function switchDetailTab(btn) {

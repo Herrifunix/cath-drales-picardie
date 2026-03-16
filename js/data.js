@@ -1,3 +1,14 @@
+// ============================================================
+// AGENDA GOOGLE CALENDAR — Comment configurer ?
+// 1. Créez un Google Calendar pour la cathédrale
+// 2. Dans les paramètres du calendrier, allez dans "Intégrer le calendrier"
+// 3. Copiez l'URL dans le champ "src" de l'iframe proposée par Google
+// 4. Collez cette URL dans le champ agendaCalendarUrl ci-dessous
+//    Ex : 'https://calendar.google.com/calendar/embed?src=exemple%40gmail.com&ctz=Europe%2FParis'
+// 5. L'onglet Agenda apparaît automatiquement dans l'app !
+// Pour désactiver l'agenda d'une cathédrale, mettez null.
+// ============================================================
+
 const CATHEDRALS = [
   {
     id: 'beauvais',
@@ -27,6 +38,8 @@ const CATHEDRALS = [
     adhesionUrl: 'https://www.helloasso.com/associations/association-beauvais-cathedrale/adhesions/adhesion-classique',
     phone: '03 44 48 11 60',
     centerServicesLinks: true,
+    // Remplacer null par l'URL Google Calendar embed (voir les instructions en haut du fichier)
+    agendaCalendarUrl: null,
     histoire: [
       "Commencée en 1225 sous l'impulsion de l'évêque-comte Milon de Nanteuil, la cathédrale Saint-Pierre devait être la plus haute du monde chrétien. La construction du chœur gothique, achevée vers 1272, atteint une hauteur de voûte de 48 mètres, un défi technique sans précédent pour l'époque.",
       "En 1284, un premier effondrement partiel des voûtes contraint les bâtisseurs à revoir entièrement la structure : les arcs-boutants sont doublés, les piles renforcées et des piliers intermédiaires, plus étroits, sont ajoutés pour diviser les travées existantes. Les travaux, ralentis par la guerre de Cent Ans et la peste, ne reprennent qu'autour de 1500. Le transept est finalement élevé au XVIe siècle, dans un style gothique flamboyant d'une grande richesse décorative.",
@@ -65,7 +78,8 @@ const CATHEDRALS = [
     ],
     website: 'https://www.cathedrale-amiens.fr',
     donUrl: null,
-    adhesionUrl: null
+    adhesionUrl: null,
+    agendaCalendarUrl: null
   },
   {
     id: 'laon',
@@ -87,7 +101,8 @@ const CATHEDRALS = [
     ],
     website: null,
     donUrl: null,
-    adhesionUrl: null
+    adhesionUrl: null,
+    agendaCalendarUrl: null
   },
   {
     id: 'noyon',
@@ -109,7 +124,8 @@ const CATHEDRALS = [
     ],
     website: null,
     donUrl: null,
-    adhesionUrl: null
+    adhesionUrl: null,
+    agendaCalendarUrl: null
   },
   {
     id: 'senlis',
@@ -130,7 +146,8 @@ const CATHEDRALS = [
     ],
     website: null,
     donUrl: null,
-    adhesionUrl: null
+    adhesionUrl: null,
+    agendaCalendarUrl: null
   },
   {
     id: 'soissons',
@@ -152,7 +169,8 @@ const CATHEDRALS = [
     ],
     website: null,
     donUrl: null,
-    adhesionUrl: null
+    adhesionUrl: null,
+    agendaCalendarUrl: null
   },
   {
     id: 'saint-quentin',
@@ -174,6 +192,7 @@ const CATHEDRALS = [
     ],
     website: null,
     donUrl: null,
-    adhesionUrl: null
+    adhesionUrl: null,
+    agendaCalendarUrl: null
   }
 ];
