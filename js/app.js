@@ -58,6 +58,48 @@ let mainMap = null;
 let veloMap = null;
 let detailMap = null;
 
+function buildAgendaIframeSrc(rawUrl) {
+  if (!rawUrl) return null;
+
+  try {
+    const url = new URL(rawUrl);
+    const isGoogleCalendar = /(^|\.)calendar\.google\.com$/i.test(url.hostname);
+    if (!isGoogleCalendar) return rawUrl;
+
+    // Supporte les liens /calendar/embed?src=... et les liens partagés avec ?cid=...
+    const srcParam = url.searchParams.get('src');
+    let cidParam = url.searchParams.get('cid');
+
+    if (cidParam && !cidParam.includes('@')) {
+      try {
+        cidParam = decodeURIComponent(atob(cidParam));
+      } catch (_) {
+        // garde la valeur d'origine si ce n'est pas du base64 valide
+      }
+    }
+
+    const calendarId = srcParam || cidParam;
+    if (!calendarId) return rawUrl;
+
+    const embed = new URL('https://calendar.google.com/calendar/embed');
+    embed.searchParams.set('src', calendarId);
+    embed.searchParams.set('ctz', url.searchParams.get('ctz') || 'Europe/Paris');
+    embed.searchParams.set('showTitle', '0');
+    embed.searchParams.set('showNav', '1');
+    embed.searchParams.set('showDate', '0');
+    embed.searchParams.set('showPrint', '0');
+    embed.searchParams.set('showTabs', '0');
+    embed.searchParams.set('showCalendars', '0');
+    embed.searchParams.set('showTz', '0');
+    embed.searchParams.set('mode', 'AGENDA');
+    embed.searchParams.set('hl', 'fr');
+
+    return embed.toString();
+  } catch (_) {
+    return rawUrl;
+  }
+}
+
 /* ===== NAVIGATION ===== */
 function navigateTo(page, param) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -98,7 +140,7 @@ function renderCards() {
   const list = DEMO_MODE ? CATHEDRALS.filter(c => DEMO_VISIBLE.includes(c.id)) : CATHEDRALS;
   grid.innerHTML = list.map(c => `
     <div class="card" onclick="navigateTo('detail', '${c.id}')">
-      <div class="card-visual">
+      <div class="card-visual" ${c.presentationImage ? `style="background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(17, 50, 89, 0.9) 85%), url('${encodeURI(c.presentationImage)}');"` : ''}>
         <div class="card-title-wrap">
           <h4>${c.name}</h4>
           <div class="card-city">&#128205; ${c.city}</div>
@@ -214,14 +256,15 @@ function renderDetail(c) {
   const presentationBlock = c.presentationImage
     ? `<div class="detail-section detail-presentation">
         <h3>${c.presentationTitle || 'Introduction'}</h3>
-        <img class="detail-presentation-image" src="${encodeURI(c.presentationImage)}" alt="Visuel de présentation - ${c.name}" loading="lazy">
+        <img class="detail-presentation-image" src="${encodeURI(c.presentationImage)}" alt="Visuel de présentation - ${c.name}" loading="lazy" onerror="this.style.display='none'">
         ${c.presentationCreditHtml ? `<p class="detail-presentation-credit">${c.presentationCreditHtml}</p>` : ''}
       </div>`
     : '';
 
   const hasServices = !!(servicesHtml || linksHtml);
   const hasAssociation = !!(c.donUrl || c.adhesionUrl);
-  const hasAgenda = !!c.agendaCalendarUrl;
+  const agendaIframeSrc = buildAgendaIframeSrc(c.agendaCalendarUrl);
+  const hasAgenda = !!agendaIframeSrc;
   let associationActionsHtml = '';
   if (c.donUrl) {
     associationActionsHtml += `<a href="${encodeURI(c.donUrl)}" target="_blank" rel="noopener noreferrer" class="btn-don">❤️ Faire un don</a>`;
@@ -318,7 +361,7 @@ function renderDetail(c) {
         <p class="agenda-intro">Retrouvez ici les prochains événements, messes, concerts et visites organisés par la cathédrale.</p>
         <iframe
           class="agenda-iframe"
-          src="${encodeURI(c.agendaCalendarUrl)}&showTitle=0&showNav=1&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=AGENDA&hl=fr"
+          src="${agendaIframeSrc}"
           title="Agenda de ${c.name}"
           loading="lazy"
         ></iframe>

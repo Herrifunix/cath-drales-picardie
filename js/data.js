@@ -16,11 +16,11 @@ const CATHEDRALS = [
     city: 'Beauvais',
     lat: 49.4326,
     lng: 2.0815,
-    emoji: '🏛️',
+    emoji: '⛪',
     shortDesc: "Chef-d'œuvre gothique inachevé, la cathédrale de Beauvais impressionne par son chœur le plus haut de la chrétienté (48 mètres) et ses deux horloges astronomiques.",
     description: "Chef-d'œuvre gothique inachevé, la cathédrale de Beauvais impressionne par son chœur le plus haut de la chrétienté (48 mètres) et ses deux horloges astronomiques. Symbole d'audace, sa construction, marquée par des effondrements, témoigne de la quête de transcendance des bâtisseurs.",
     presentationTitle: 'Introduction - Présentation',
-    presentationImage: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cath%C3%A9drale_Saint-Pierre_de_Beauvais_(1).jpg',
+    presentationImage: './img/cathedrale_beauvais.jpg',
     presentationCreditHtml: 'Crédit : Par <a href="//commons.wikimedia.org/wiki/User:Baidax" title="User:Baidax">Baidax</a> — <span class="int-own-work" lang="fr">Travail personnel</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=94632818">Lien</a>',
     address: 'Rue Saint-Pierre, 60000 BEAUVAIS',
     horairesNote: "L'Association Beauvais Cathédrale ouvre la cathédrale tous les jours de l'année (sauf exception).",
@@ -39,7 +39,7 @@ const CATHEDRALS = [
     phone: '03 44 48 11 60',
     centerServicesLinks: true,
     // Remplacer null par l'URL Google Calendar embed (voir les instructions en haut du fichier)
-    agendaCalendarUrl: null,
+    agendaCalendarUrl: 'https://calendar.google.com/calendar/embed?src=f84939bf3b5ae33336f6e70cad49173885cecb44101ae04543341f66cf0135ad%40group.calendar.google.com&ctz=Europe%2FParis',
     histoire: [
       "Commencée en 1225 sous l'impulsion de l'évêque-comte Milon de Nanteuil, la cathédrale Saint-Pierre devait être la plus haute du monde chrétien. La construction du chœur gothique, achevée vers 1272, atteint une hauteur de voûte de 48 mètres, un défi technique sans précédent pour l'époque.",
       "En 1284, un premier effondrement partiel des voûtes contraint les bâtisseurs à revoir entièrement la structure : les arcs-boutants sont doublés, les piles renforcées et des piliers intermédiaires, plus étroits, sont ajoutés pour diviser les travées existantes. Les travaux, ralentis par la guerre de Cent Ans et la peste, ne reprennent qu'autour de 1500. Le transept est finalement élevé au XVIe siècle, dans un style gothique flamboyant d'une grande richesse décorative.",
@@ -67,6 +67,8 @@ const CATHEDRALS = [
     emoji: '⛪',
     shortDesc: "Plus vaste cathédrale de France, Notre-Dame d'Amiens est un chef-d'œuvre du gothique classique, inscrite au patrimoine mondial de l'UNESCO.",
     description: "Plus vaste cathédrale de France par ses volumes intérieurs, Notre-Dame d'Amiens est un chef-d'œuvre du gothique classique. Inscrite au patrimoine mondial de l'UNESCO, elle fascine par sa façade ornée de plus de 3 000 statues et son élévation harmonieuse. Sa nef immense (42,3 m de haut, 145 m de long) en fait un joyau de l'architecture médiévale.",
+    presentationTitle: 'Introduction - Présentation',
+    presentationImage: './img/cathedrale_amiens.jpg',
     address: '30 Place Notre-Dame, 80000 AMIENS',
     horaires: [
       { periode: 'Toute l\'année', detail: 'Tous les jours de 8 h 30 à 17 h 15 (18 h 15 d\'avril à septembre)' }
@@ -79,7 +81,7 @@ const CATHEDRALS = [
     website: 'https://www.cathedrale-amiens.fr',
     donUrl: null,
     adhesionUrl: null,
-    agendaCalendarUrl: null
+    agendaCalendarUrl: 'https://calendar.google.com/calendar/embed?src=f84939bf3b5ae33336f6e70cad49173885cecb44101ae04543341f66cf0135ad%40group.calendar.google.com&ctz=Europe%2FParis'
   },
   {
     id: 'laon',
