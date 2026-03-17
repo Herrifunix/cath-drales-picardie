@@ -100,6 +100,10 @@ function buildAgendaIframeSrc(rawUrl) {
   }
 }
 
+function getActiveCathedrals() {
+  return DEMO_MODE ? CATHEDRALS.filter(c => DEMO_VISIBLE.includes(c.id)) : CATHEDRALS;
+}
+
 /* ===== NAVIGATION ===== */
 function navigateTo(page, param) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -127,6 +131,14 @@ function navigateTo(page, param) {
   window.location.hash = param ? `${page}/${param}` : page;
 }
 
+function goBackOrHome() {
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    navigateTo('home');
+  }
+}
+
 /* Bottom nav */
 document.querySelectorAll('.nav-item').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -137,7 +149,7 @@ document.querySelectorAll('.nav-item').forEach(btn => {
 /* ===== RENDER CARDS ===== */
 function renderCards() {
   const grid = document.getElementById('cathedral-cards');
-  const list = DEMO_MODE ? CATHEDRALS.filter(c => DEMO_VISIBLE.includes(c.id)) : CATHEDRALS;
+  const list = getActiveCathedrals();
   grid.innerHTML = list.map(c => `
     <div class="card" onclick="navigateTo('detail', '${c.id}')">
       <div class="card-visual" ${c.presentationImage ? `style="background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(17, 50, 89, 0.9) 85%), url('${encodeURI(c.presentationImage)}');"` : ''}>
@@ -281,6 +293,10 @@ function renderDetail(c) {
       <div class="detail-hero-icon">${c.emoji}</div>
       <h2>${c.name}</h2>
       <div class="detail-city">📍 ${c.city}</div>
+      <div class="detail-quick-nav">
+        <button class="detail-quick-nav-btn" onclick="goBackOrHome()">← Retour</button>
+        <button class="detail-quick-nav-btn" onclick="navigateTo('home')">🏠 Accueil</button>
+      </div>
     </div>
 
     <div class="detail-tab-card">

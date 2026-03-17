@@ -74,7 +74,7 @@ body {
 .hero {
   position: relative;
   padding: 50px 12px 36px;
-  background-image: linear-gradient(180deg, rgba(4, 21, 46, 0.35), rgba(4, 21, 46, 0.78)), url("../sources et inspirations/7cath-accueil.png");
+  background-image: linear-gradient(180deg, rgba(4, 21, 46, 0.06), rgba(4, 21, 46, 0.7)), url("../img/header_7_cathedrales.jpg");
   background-size: cover;
   background-position: center;
 }
@@ -82,7 +82,7 @@ body {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(4, 21, 46, 0.35) 0%, rgba(4, 21, 46, 0.86) 88%);
+  background: linear-gradient(180deg, rgba(4, 21, 46, 0.02) 0%, rgba(4, 21, 46, 0.2) 88%);
 }
 
 .hero-inner {
@@ -430,6 +430,27 @@ body {
 .detail-city {
   margin-top: 6px;
   color: #d7dfdb;
+}
+
+.detail-quick-nav {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.detail-quick-nav-btn {
+  border: 1px solid rgba(229, 196, 94, 0.55);
+  background: rgba(4, 21, 46, 0.75);
+  color: #f3d57f;
+  border-radius: 9px;
+  padding: 10px 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.detail-quick-nav-btn:hover {
+  background: rgba(229, 196, 94, 0.16);
 }
 
 .detail-section {
