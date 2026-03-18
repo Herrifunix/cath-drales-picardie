@@ -107,7 +107,7 @@
             </div>
           </div>
           <h3>Étapes suggérées</h3>
-          <ol class="etapes-list">
+          <ol id="velo-etapes-list" class="etapes-list">
             <li><strong>Beauvais</strong> → Senlis <span class="distance">~56 km</span></li>
             <li><strong>Senlis</strong> → Noyon <span class="distance">~60 km</span></li>
             <li><strong>Noyon</strong> → Laon <span class="distance">~52 km</span></li>
@@ -115,8 +115,24 @@
             <li><strong>Saint-Quentin</strong> → Soissons <span class="distance">~60 km</span></li>
             <li><strong>Soissons</strong> → Amiens <span class="distance">~95 km</span></li>
           </ol>
+          <div class="velo-trajet-controls">
+            <label class="velo-trajet-label" for="velo-trajet-select">Trajet à afficher</label>
+            <select id="velo-trajet-select" class="velo-trajet-select"></select>
+            <a id="velo-gpx-download" class="velo-gpx-download hidden" href="#" download>Télécharger le GPX</a>
+            <p id="velo-gpx-status" class="note">Sélectionnez un trajet pour charger son GPX.</p>
+          </div>
           <div id="map-velo" class="map-container-small"></div>
-          <p class="note">Le fichier GPX du circuit sera bientôt disponible au téléchargement.</p>
+          <div id="velo-trace-info" class="velo-trace-info hidden">
+            <h4>Informations de trace</h4>
+            <div class="velo-trace-grid">
+              <p><strong>Distance totale:</strong> <span id="trace-distance">--</span></p>
+              <p><strong>Points de trace:</strong> <span id="trace-points">--</span></p>
+              <p><strong>Altitude min:</strong> <span id="trace-min-alt">--</span></p>
+              <p><strong>Altitude max:</strong> <span id="trace-max-alt">--</span></p>
+              <p><strong>Dénivelé positif:</strong> <span id="trace-positive">--</span></p>
+              <p><strong>Dénivelé négatif:</strong> <span id="trace-negative">--</span></p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

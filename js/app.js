@@ -8,6 +8,16 @@ if ('serviceWorker' in navigator) {
 const DEMO_MODE = true;
 const DEMO_VISIBLE = ['amiens', 'beauvais'];
 
+const VELO_TRAJETS = [
+  { id: 'beauvais-senlis', fromId: 'beauvais', toId: 'senlis', distance: '~56 km' },
+  { id: 'senlis-noyon', fromId: 'senlis', toId: 'noyon', distance: '~60 km' },
+  { id: 'noyon-laon', fromId: 'noyon', toId: 'laon', distance: '~52 km' },
+  { id: 'laon-saint-quentin', fromId: 'laon', toId: 'saint-quentin', distance: '~45 km' },
+  { id: 'saint-quentin-soissons', fromId: 'saint-quentin', toId: 'soissons', distance: '~60 km' },
+  { id: 'soissons-amiens', fromId: 'soissons', toId: 'amiens', distance: '~95 km' },
+  { id: 'beauvais-amiens', fromId: 'beauvais', toId: 'amiens', distance: '~68 km' }
+];
+
 /* ===== INSTALL (optionnel) ===== */
 let deferredPrompt = null;
 
@@ -57,6 +67,10 @@ let currentPage = 'home';
 let mainMap = null;
 let veloMap = null;
 let detailMap = null;
+let veloRouteLayer = null;
+let veloMarkersLayer = null;
+let veloAvailableTrajets = [];
+let veloUiSetupPromise = null;
 
 function buildAgendaIframeSrc(rawUrl) {
   if (!rawUrl) return null;
@@ -102,6 +116,272 @@ function buildAgendaIframeSrc(rawUrl) {
 
 function getActiveCathedrals() {
   return DEMO_MODE ? CATHEDRALS.filter(c => DEMO_VISIBLE.includes(c.id)) : CATHEDRALS;
+}
+
+function getCathedralById(id) {
+  return CATHEDRALS.find(c => c.id === id) || null;
+}
+
+function getTrajetLabel(trajet) {
+  const from = getCathedralById(trajet.fromId)?.city || trajet.fromId;
+  const to = getCathedralById(trajet.toId)?.city || trajet.toId;
+  return `${from} -> ${to}`;
+}
+
+function getTrajetGpxCandidates(trajet) {
+  const from = getCathedralById(trajet.fromId)?.city || trajet.fromId;
+  const to = getCathedralById(trajet.toId)?.city || trajet.toId;
+  return [
+    `./gpx/Gpx ${from} ${to}.gpx`,
+    `./gpx/Gpx ${from} ${to} .gpx`,
+    `./gpx/Gpx ${from} ${to}.GPX`,
+    `./gpx/Gpx ${from} ${to} .GPX`,
+    `./gpx/${from}-${to}.gpx`,
+    `./gpx/${from}_${to}.gpx`
+  ];
+}
+
+function haversineDistanceKm(a, b) {
+  const toRad = (deg) => (deg * Math.PI) / 180;
+  const earthRadiusKm = 6371;
+  const dLat = toRad(b.lat - a.lat);
+  const dLon = toRad(b.lng - a.lng);
+  const lat1 = toRad(a.lat);
+  const lat2 = toRad(b.lat);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
+  return 2 * earthRadiusKm * Math.asin(Math.sqrt(h));
+}
+
+function parseGpxData(gpxText) {
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(gpxText, 'application/xml');
+  const parseNode = (node) => {
+    const lat = Number.parseFloat(node.getAttribute('lat'));
+    const lng = Number.parseFloat(node.getAttribute('lon'));
+    const eleText = node.querySelector('ele')?.textContent;
+    const ele = Number.parseFloat(eleText || '');
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+    return { lat, lng, ele: Number.isFinite(ele) ? ele : null };
+  };
+
+  let sourcePoints = Array.from(xmlDoc.querySelectorAll('trkpt')).map(parseNode).filter(Boolean);
+  if (sourcePoints.length < 2) {
+    sourcePoints = Array.from(xmlDoc.querySelectorAll('rtept')).map(parseNode).filter(Boolean);
+  }
+  if (sourcePoints.length < 2) return null;
+
+  const points = sourcePoints.map((p) => [p.lat, p.lng]);
+
+  let distanceKm = 0;
+  for (let i = 1; i < sourcePoints.length; i += 1) {
+    distanceKm += haversineDistanceKm(sourcePoints[i - 1], sourcePoints[i]);
+  }
+
+  let minAltitude = null;
+  let maxAltitude = null;
+  let positiveGain = 0;
+  let negativeGain = 0;
+
+  for (let i = 0; i < sourcePoints.length; i += 1) {
+    const currentEle = sourcePoints[i].ele;
+    if (Number.isFinite(currentEle)) {
+      minAltitude = minAltitude === null ? currentEle : Math.min(minAltitude, currentEle);
+      maxAltitude = maxAltitude === null ? currentEle : Math.max(maxAltitude, currentEle);
+    }
+
+    if (i === 0) continue;
+    const prevEle = sourcePoints[i - 1].ele;
+    if (!Number.isFinite(prevEle) || !Number.isFinite(currentEle)) continue;
+    const diff = currentEle - prevEle;
+    if (diff > 0) positiveGain += diff;
+    else negativeGain += Math.abs(diff);
+  }
+
+  return {
+    points,
+    stats: {
+      distanceKm,
+      pointCount: sourcePoints.length,
+      minAltitude,
+      maxAltitude,
+      positiveGain,
+      negativeGain
+    }
+  };
+}
+
+async function fetchTrajetGpx(trajet) {
+  const candidates = getTrajetGpxCandidates(trajet);
+  for (const candidate of candidates) {
+    try {
+      const response = await fetch(encodeURI(candidate));
+      if (!response.ok) continue;
+      const gpxText = await response.text();
+      const parsed = parseGpxData(gpxText);
+      if (parsed?.points?.length > 1) {
+        return { points: parsed.points, stats: parsed.stats, url: encodeURI(candidate) };
+      }
+    } catch (_) {
+      // on tente le candidat suivant
+    }
+  }
+  return null;
+}
+
+async function findAvailableVeloTrajets() {
+  const available = [];
+  for (const trajet of VELO_TRAJETS) {
+    const loaded = await fetchTrajetGpx(trajet);
+    if (loaded?.url && loaded?.points?.length > 1) {
+      available.push({ ...trajet, gpxUrl: loaded.url, points: loaded.points, stats: loaded.stats });
+    }
+  }
+  return available;
+}
+
+function formatOneDecimal(value) {
+  return Number.isFinite(value) ? value.toFixed(1) : '--';
+}
+
+function setVeloTraceInfo(stats) {
+  const panel = document.getElementById('velo-trace-info');
+  const distanceEl = document.getElementById('trace-distance');
+  const pointsEl = document.getElementById('trace-points');
+  const minAltEl = document.getElementById('trace-min-alt');
+  const maxAltEl = document.getElementById('trace-max-alt');
+  const posEl = document.getElementById('trace-positive');
+  const negEl = document.getElementById('trace-negative');
+  if (!panel || !distanceEl || !pointsEl || !minAltEl || !maxAltEl || !posEl || !negEl) return;
+
+  if (!stats) {
+    panel.classList.add('hidden');
+    return;
+  }
+
+  panel.classList.remove('hidden');
+  distanceEl.textContent = `${formatOneDecimal(stats.distanceKm)} km`;
+  pointsEl.textContent = `${stats.pointCount ?? '--'}`;
+  minAltEl.textContent = `${formatOneDecimal(stats.minAltitude)} m`;
+  maxAltEl.textContent = `${formatOneDecimal(stats.maxAltitude)} m`;
+  posEl.textContent = `${formatOneDecimal(stats.positiveGain)} m`;
+  negEl.textContent = `${formatOneDecimal(stats.negativeGain)} m`;
+}
+
+function setVeloStatus(message, isError = false) {
+  const statusEl = document.getElementById('velo-gpx-status');
+  if (!statusEl) return;
+  statusEl.textContent = message;
+  statusEl.classList.toggle('velo-status-error', isError);
+}
+
+function setVeloDownloadLink(url) {
+  const linkEl = document.getElementById('velo-gpx-download');
+  if (!linkEl) return;
+  if (!url) {
+    linkEl.classList.add('hidden');
+    linkEl.removeAttribute('href');
+    return;
+  }
+  linkEl.href = url;
+  linkEl.classList.remove('hidden');
+}
+
+function renderVeloEtapesList() {
+  const etapesEl = document.getElementById('velo-etapes-list');
+  if (!etapesEl) return;
+
+  etapesEl.innerHTML = veloAvailableTrajets.map((trajet) => {
+    const from = getCathedralById(trajet.fromId)?.city || trajet.fromId;
+    const to = getCathedralById(trajet.toId)?.city || trajet.toId;
+    return `<li><strong>${from}</strong> -> ${to} <span class="distance">${trajet.distance}</span></li>`;
+  }).join('');
+}
+
+async function loadVeloTrajet(trajetId) {
+  if (!veloMap) return;
+  const trajet = veloAvailableTrajets.find(t => t.id === trajetId);
+  if (!trajet) return;
+
+  if (veloRouteLayer) {
+    veloMap.removeLayer(veloRouteLayer);
+    veloRouteLayer = null;
+  }
+  if (veloMarkersLayer) {
+    veloMap.removeLayer(veloMarkersLayer);
+    veloMarkersLayer = null;
+  }
+
+  const from = getCathedralById(trajet.fromId);
+  const to = getCathedralById(trajet.toId);
+  if (!from || !to) return;
+
+  setVeloStatus(`Chargement du GPX : ${from.city} -> ${to.city}...`);
+  setVeloDownloadLink(trajet.gpxUrl || null);
+
+  const routePoints = trajet.points;
+  if (!routePoints || routePoints.length < 2) {
+    setVeloStatus('', false);
+    setVeloTraceInfo(null);
+    return;
+  }
+
+  veloRouteLayer = L.polyline(routePoints, {
+    color: '#c9a84c',
+    weight: 4,
+    opacity: 0.95
+  }).addTo(veloMap);
+
+  veloMarkersLayer = L.layerGroup([
+    L.circleMarker([from.lat, from.lng], { radius: 7, fillColor: '#c9a84c', fillOpacity: 1, color: '#fff', weight: 2 }).bindTooltip(`Départ : ${from.city}`),
+    L.circleMarker([to.lat, to.lng], { radius: 7, fillColor: '#1f4a7c', fillOpacity: 1, color: '#fff', weight: 2 }).bindTooltip(`Arrivée : ${to.city}`)
+  ]).addTo(veloMap);
+
+  veloMap.fitBounds(veloRouteLayer.getBounds(), { padding: [20, 20] });
+
+  setVeloStatus(`Trajet charge : ${from.city} -> ${to.city}`);
+  setVeloTraceInfo(trajet.stats || null);
+}
+
+async function setupVeloUi() {
+  if (!veloUiSetupPromise) {
+    veloUiSetupPromise = findAvailableVeloTrajets();
+  }
+  veloAvailableTrajets = await veloUiSetupPromise;
+  renderVeloEtapesList();
+
+  const selectEl = document.getElementById('velo-trajet-select');
+  const controlsEl = document.querySelector('.velo-trajet-controls');
+  const listEl = document.getElementById('velo-etapes-list');
+  const mapEl = document.getElementById('map-velo');
+  const etapesTitleEl = document.querySelector('.velo-info h3');
+  if (!selectEl || !controlsEl || !listEl || !mapEl || !etapesTitleEl) return;
+
+  if (!veloAvailableTrajets.length) {
+    etapesTitleEl.classList.add('hidden');
+    listEl.classList.add('hidden');
+    controlsEl.classList.add('hidden');
+    mapEl.classList.add('hidden');
+    setVeloTraceInfo(null);
+    setVeloStatus('', false);
+    setVeloDownloadLink(null);
+    return;
+  }
+
+  etapesTitleEl.classList.remove('hidden');
+  listEl.classList.remove('hidden');
+  controlsEl.classList.remove('hidden');
+  mapEl.classList.remove('hidden');
+
+  selectEl.innerHTML = veloAvailableTrajets.map((trajet) =>
+    `<option value="${trajet.id}">${getTrajetLabel(trajet)} (${trajet.distance})</option>`
+  ).join('');
+
+  if (!selectEl.dataset.bound) {
+    selectEl.addEventListener('change', () => {
+      loadVeloTrajet(selectEl.value);
+    });
+    selectEl.dataset.bound = 'true';
+  }
 }
 
 /* ===== NAVIGATION ===== */
@@ -201,28 +481,26 @@ function initMainMap() {
 }
 
 function initVeloMap() {
-  if (veloMap) { veloMap.invalidateSize(); return; }
+  setupVeloUi().then(() => {
+    const selectEl = document.getElementById('velo-trajet-select');
+    if (!veloAvailableTrajets.length || !selectEl?.value) return;
 
-  setTimeout(() => {
-    veloMap = L.map('map-velo').setView([49.55, 2.85], 8);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap'
-    }).addTo(veloMap);
+    if (veloMap) {
+      veloMap.invalidateSize();
+      loadVeloTrajet(selectEl.value);
+      return;
+    }
 
-    const route = CATHEDRALS.map(c => [c.lat, c.lng]);
-    route.push(route[0]); // boucle
+    setTimeout(() => {
+      veloMap = L.map('map-velo').setView([49.55, 2.85], 8);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap'
+      }).addTo(veloMap);
 
-    L.polyline(route, { color: '#c9a84c', weight: 3, dashArray: '10 6' }).addTo(veloMap);
-
-    CATHEDRALS.forEach(c => {
-      L.circleMarker([c.lat, c.lng], {
-        radius: 7, fillColor: '#c9a84c', fillOpacity: 1,
-        color: '#fff', weight: 2
-      }).addTo(veloMap).bindTooltip(c.city, { permanent: true, direction: 'top', offset: [0, -10] });
-    });
-
-    veloMap.invalidateSize();
-  }, 100);
+      loadVeloTrajet(selectEl.value);
+      veloMap.invalidateSize();
+    }, 100);
+  });
 }
 
 /* ===== DETAIL PAGE ===== */
@@ -426,12 +704,9 @@ window.addEventListener('hashchange', handleHash);
 /* ===== INIT ===== */
 renderCards();
 
-// Masquer carte et vélo en mode demo
-if (DEMO_MODE) {
-  document.getElementById('bottom-nav')?.remove();
-  document.getElementById('btn-explore')?.remove();
-  document.getElementById('btn-velo')?.remove();
-  document.getElementById('btn-velo-highlight')?.remove();
-}
+// Cacher l'option carte pour l'instant
+document.getElementById('btn-explore')?.classList.add('hidden');
+document.querySelector('.nav-item[data-page="map"]')?.remove();
+document.getElementById('page-map')?.classList.remove('active');
 
 handleHash();

@@ -36,8 +36,8 @@ body {
   z-index: 1300;
   height: calc(var(--nav-height) + var(--safe-bottom));
   padding-bottom: var(--safe-bottom);
-  background: #ffffff;
-  border-top: 1px solid rgba(10, 22, 41, 0.2);
+  background: linear-gradient(180deg, #0a2a4f, #082142);
+  border-top: 1px solid rgba(229, 196, 94, 0.3);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -46,7 +46,7 @@ body {
 .nav-item {
   border: none;
   background: transparent;
-  color: #6b777e;
+  color: rgba(219, 230, 241, 0.78);
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -55,7 +55,7 @@ body {
   padding: 6px 10px;
 }
 
-.nav-item.active { color: var(--green-700); }
+.nav-item.active { color: var(--gold-400); }
 .nav-icon { font-size: 1.35rem; }
 .nav-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.6px; }
 
@@ -589,6 +589,76 @@ body {
 .etapes-list li { margin: 8px 0; }
 .distance { color: #d9e2dc; font-size: 0.85rem; }
 .note { margin-top: 12px; color: #d4ddd8; font-style: italic; }
+
+.velo-trajet-controls {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.velo-trajet-label {
+  color: #f0d889;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.velo-trajet-select {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(229, 196, 94, 0.45);
+  background: rgba(4, 21, 46, 0.75);
+  color: #ffffff;
+  padding: 10px 12px;
+}
+
+.velo-gpx-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 10px 12px;
+  border: 1px solid rgba(229, 196, 94, 0.55);
+  color: #f4d57a;
+  background: rgba(4, 21, 46, 0.55);
+}
+
+.velo-status-error {
+  color: #ffd5d5;
+}
+
+.velo-trace-info {
+  margin-top: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  border: 1px solid rgba(209, 171, 51, 0.25);
+  padding: 12px 14px;
+}
+
+.velo-trace-info h4 {
+  margin: 0 0 10px;
+  color: #edf3f0;
+  font-size: 1.05rem;
+}
+
+.velo-trace-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px 18px;
+}
+
+.velo-trace-grid p {
+  margin: 0;
+  color: #edf3f0;
+}
+
+@media (min-width: 780px) {
+  .velo-trace-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
 .install-hint {
   text-align: center;
