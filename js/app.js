@@ -706,7 +706,6 @@ renderCards();
 
 // Cacher l'option carte pour l'instant
 document.getElementById('btn-explore')?.classList.add('hidden');
-document.querySelector('.nav-item[data-page="map"]')?.remove();
 document.getElementById('page-map')?.classList.remove('active');
 
 handleHash();
