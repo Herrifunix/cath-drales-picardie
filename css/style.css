@@ -434,9 +434,7 @@ body {
 
 .detail-quick-nav {
   margin-top: 14px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  display: block;
 }
 
 .detail-quick-nav-btn {
@@ -447,6 +445,7 @@ body {
   padding: 10px 12px;
   font-weight: 600;
   cursor: pointer;
+  width: 100%;
 }
 
 .detail-quick-nav-btn:hover {

@@ -545,7 +545,7 @@ function renderDetail(c) {
 
   const presentationBlock = c.presentationImage
     ? `<div class="detail-section detail-presentation">
-        <h3>${c.presentationTitle || 'Introduction'}</h3>
+        <h3>${c.presentationTitle || 'Présentation'}</h3>
         <img class="detail-presentation-image" src="${encodeURI(c.presentationImage)}" alt="Visuel de présentation - ${c.name}" loading="lazy" onerror="this.style.display='none'">
         ${c.presentationCreditHtml ? `<p class="detail-presentation-credit">${c.presentationCreditHtml}</p>` : ''}
       </div>`
@@ -571,16 +571,12 @@ function renderDetail(c) {
       <div class="detail-hero-icon">${c.emoji}</div>
       <h2>${c.name}</h2>
       <div class="detail-city">📍 ${c.city}</div>
-      <div class="detail-quick-nav">
-        <button class="detail-quick-nav-btn" onclick="goBackOrHome()">← Retour</button>
-        <button class="detail-quick-nav-btn" onclick="navigateTo('home')">🏠 Accueil</button>
-      </div>
     </div>
 
     <div class="detail-tab-card">
       <div class="detail-tabs">
-        <button class="detail-tab-btn active" data-tab="introduction" onclick="switchDetailTab(this)">
-          <span class="detail-tab-icon">⚙️</span> Introduction
+        <button class="detail-tab-btn active" data-tab="presentation" onclick="switchDetailTab(this)">
+          <span class="detail-tab-icon">⚙️</span> Présentation
         </button>
         <button class="detail-tab-btn" data-tab="acces" onclick="switchDetailTab(this)">
           <span class="detail-tab-icon">📍</span> Accès
@@ -598,9 +594,12 @@ function renderDetail(c) {
           <span class="detail-tab-icon">📅</span> Agenda
         </button>` : ''}
       </div>
+      <div class="detail-quick-nav">
+        <button class="detail-quick-nav-btn" onclick="goBackOrHome()">← Retour</button>
+      </div>
     </div>
 
-    <div id="tab-introduction" class="detail-tab-panel">
+    <div id="tab-presentation" class="detail-tab-panel">
       ${presentationBlock}
       <div class="detail-section">
         <p>${c.description}</p>
