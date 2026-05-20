@@ -132,12 +132,8 @@ function getTrajetGpxCandidates(trajet) {
   const from = getCathedralById(trajet.fromId)?.city || trajet.fromId;
   const to = getCathedralById(trajet.toId)?.city || trajet.toId;
   return [
-    `./gpx/Gpx ${from} ${to}.gpx`,
     `./gpx/Gpx ${from} ${to} .gpx`,
-    `./gpx/Gpx ${from} ${to}.GPX`,
-    `./gpx/Gpx ${from} ${to} .GPX`,
-    `./gpx/${from}-${to}.gpx`,
-    `./gpx/${from}_${to}.gpx`
+    `./gpx/Gpx ${from} ${to}.gpx`
   ];
 }
 
@@ -229,14 +225,16 @@ async function fetchTrajetGpx(trajet) {
 }
 
 async function findAvailableVeloTrajets() {
-  const available = [];
-  for (const trajet of VELO_TRAJETS) {
-    const loaded = await fetchTrajetGpx(trajet);
-    if (loaded?.url && loaded?.points?.length > 1) {
-      available.push({ ...trajet, gpxUrl: loaded.url, points: loaded.points, stats: loaded.stats });
-    }
-  }
-  return available;
+  const results = await Promise.all(
+    VELO_TRAJETS.map(async (trajet) => {
+      const loaded = await fetchTrajetGpx(trajet);
+      if (loaded?.url && loaded?.points?.length > 1) {
+        return { ...trajet, gpxUrl: loaded.url, points: loaded.points, stats: loaded.stats };
+      }
+      return null;
+    })
+  );
+  return results.filter(Boolean);
 }
 
 function formatOneDecimal(value) {
@@ -450,34 +448,32 @@ function renderCards() {
 function initMainMap() {
   if (mainMap) { mainMap.invalidateSize(); return; }
 
-  setTimeout(() => {
-    mainMap = L.map('map').setView([49.55, 2.85], 9);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap'
-    }).addTo(mainMap);
+  mainMap = L.map('map').setView([49.55, 2.85], 9);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap'
+  }).addTo(mainMap);
 
-    const goldIcon = L.divIcon({
-      className: 'custom-marker',
-      html: '<div style="background:linear-gradient(135deg,#c9a84c,#b8942f);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 3px 10px rgba(0,0,0,0.4);border:2px solid #fff;">⛪</div>',
-      iconSize: [32, 32],
-      iconAnchor: [16, 16]
-    });
+  const goldIcon = L.divIcon({
+    className: 'custom-marker',
+    html: '<div style="background:linear-gradient(135deg,#c9a84c,#b8942f);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 3px 10px rgba(0,0,0,0.4);border:2px solid #fff;">⛪</div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16]
+  });
 
-    CATHEDRALS.forEach(c => {
-      const marker = L.marker([c.lat, c.lng], { icon: goldIcon }).addTo(mainMap);
-      const geoHref = `geo:${c.lat},${c.lng}?q=${encodeURIComponent(`${c.name}, ${c.city}`)}`;
-      marker.bindPopup(`
-        <div class="popup-name">${c.city}</div>
-        <div style="font-size:0.85rem;color:#ccc;margin:4px 0;">${c.name}</div>
-        <div class="popup-actions">
-          <span class="popup-link" onclick="navigateTo('detail','${c.id}')">Voir la fiche →</span>
-          <a class="popup-nav-btn" href="${geoHref}">Naviguer</a>
-        </div>
-      `);
-    });
+  CATHEDRALS.forEach(c => {
+    const marker = L.marker([c.lat, c.lng], { icon: goldIcon }).addTo(mainMap);
+    const geoHref = `geo:${c.lat},${c.lng}?q=${encodeURIComponent(`${c.name}, ${c.city}`)}`;
+    marker.bindPopup(`
+      <div class="popup-name">${c.city}</div>
+      <div style="font-size:0.85rem;color:#ccc;margin:4px 0;">${c.name}</div>
+      <div class="popup-actions">
+        <span class="popup-link" onclick="navigateTo('detail','${c.id}')">Voir la fiche →</span>
+        <a class="popup-nav-btn" href="${geoHref}">Naviguer</a>
+      </div>
+    `);
+  });
 
-    mainMap.invalidateSize();
-  }, 100);
+  mainMap.invalidateSize();
 }
 
 function initVeloMap() {
@@ -491,15 +487,13 @@ function initVeloMap() {
       return;
     }
 
-    setTimeout(() => {
-      veloMap = L.map('map-velo').setView([49.55, 2.85], 8);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap'
-      }).addTo(veloMap);
+    veloMap = L.map('map-velo').setView([49.55, 2.85], 8);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(veloMap);
 
-      loadVeloTrajet(selectEl.value);
-      veloMap.invalidateSize();
-    }, 100);
+    loadVeloTrajet(selectEl.value);
+    veloMap.invalidateSize();
   });
 }
 
@@ -670,19 +664,17 @@ function switchDetailTab(btn) {
   document.getElementById('tab-' + tabId).classList.remove('hidden');
 
   if (tabId === 'acces' && !detailMap) {
-    setTimeout(() => {
-      const id = document.getElementById('detail-content').dataset.cathedralId;
-      const cathedral = CATHEDRALS.find(cat => cat.id === id);
-      const mapEl = document.getElementById('detail-map-' + id);
-      if (mapEl && cathedral) {
-        detailMap = L.map(mapEl).setView([cathedral.lat, cathedral.lng], 16);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; OpenStreetMap'
-        }).addTo(detailMap);
-        L.marker([cathedral.lat, cathedral.lng]).addTo(detailMap);
-        detailMap.invalidateSize();
-      }
-    }, 150);
+    const id = document.getElementById('detail-content').dataset.cathedralId;
+    const cathedral = CATHEDRALS.find(cat => cat.id === id);
+    const mapEl = document.getElementById('detail-map-' + id);
+    if (mapEl && cathedral) {
+      detailMap = L.map(mapEl).setView([cathedral.lat, cathedral.lng], 16);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap'
+      }).addTo(detailMap);
+      L.marker([cathedral.lat, cathedral.lng]).addTo(detailMap);
+      detailMap.invalidateSize();
+    }
   }
 }
 
