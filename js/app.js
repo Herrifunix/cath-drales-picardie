@@ -5,7 +5,7 @@ if ('serviceWorker' in navigator) {
 
 /* ===== DEMO MODE ===== */
 // Passer à false pour tout afficher
-const DEMO_MODE = true;
+const DEMO_MODE = false;
 const DEMO_VISIBLE = ['amiens', 'beauvais'];
 
 const VELO_TRAJETS = [
