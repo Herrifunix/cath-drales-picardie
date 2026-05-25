@@ -139,7 +139,7 @@ const CATHEDRALS = [
     shortDesc: "La cathédrale de Senlis est l\’une des plus petites de France : 70 m de longueur pour 24 m sous voûte ! Construite sur quatre siècles, elle est un exemple parfait de l\’évolution du style gothique du primitif au rayonnant.",
     description: "La cathédrale de Senlis est l\’une des plus petites de France : 70 m de longueur pour 24 m sous voûte ! Construite sur quatre siècles, elle est un exemple parfait de l\’évolution du style gothique du primitif au rayonnant.",
     presentationTitle: 'Présentation',
-    presentationImage: './img/cathedrale-senlis.JPG',
+    presentationImage: './img/cathedrale-senlis.jpg',
     presentationCreditHtml: 'François Chapuis',
     
     address: 'Place du Parvis Notre-Dame, 60300 SENLIS',
