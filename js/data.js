@@ -136,8 +136,12 @@ const CATHEDRALS = [
     lat: 49.2068,
     lng: 2.5856,
     emoji: '👑',
-    shortDesc: "Cathédrale royale au portail sculpté du Couronnement de la Vierge, Senlis est un bijou de l'art gothique primitif dans la cité des rois.",
-    description: "Élevée à partir de 1153, la cathédrale Notre-Dame de Senlis est un bijou de l'art gothique primitif, célèbre pour son portail occidental sculpté du Couronnement de la Vierge, l'un des premiers du genre. Sa flèche élancée (78 m) domine la cité royale. Malgré sa taille modeste, elle rayonne par la finesse de sa sculpture et son histoire liée aux rois de France.",
+    shortDesc: "La cathédrale de Senlis est l\’une des plus petites de France : 70 m de longueur pour 24 m sous voûte ! Construite sur quatre siècles, elle est un exemple parfait de l\’évolution du style gothique du primitif au rayonnant.",
+    description: "La cathédrale de Senlis est l\’une des plus petites de France : 70 m de longueur pour 24 m sous voûte ! Construite sur quatre siècles, elle est un exemple parfait de l\’évolution du style gothique du primitif au rayonnant.",
+    presentationTitle: 'Présentation',
+    presentationImage: './img/cathedrale_beauvais.jpg',
+    presentationCreditHtml: 'François Chapuis',
+    
     address: 'Place du Parvis Notre-Dame, 60300 SENLIS',
     horaires: [
       { periode: 'Toute l\'année', detail: 'Tous les jours de 8 h à 18 h 30' }
@@ -150,6 +154,23 @@ const CATHEDRALS = [
     donUrl: null,
     adhesionUrl: null,
     agendaCalendarUrl: null
+
+    histoire: [
+      "Origines et début de la construction. La cathédrale est édifiée à partir de 1151 sur l\'emplacement de sanctuaires plus anciens, sous l\'impulsion de l\'évêque Pierre (1134-1151) et avec le soutien du roi Louis VII. Senlis, ville royale à l\'époque, connaît alors un âge d\'or. Les travaux débutent simultanément aux deux extrémités de l\'édifice : le chœur et la façade occidentale sont achevés vers 1167, et la nef est raccordée au chœur en 1175. La cathédrale est consacrée le 16 juin 1191, mais elle ne possède pas encore de transept, ce qui la rend rapidement démodée face à l\'évolution rapide de l\'architecture gothique.",
+      "Évolution et style gothique. La cathédrale de Senlis est un exemple parfait de l\'évolution du style gothique, du primitif au rayonnant. Son portail occidental, réalisé dans les années 1160-1170, est l\'un des chefs-d\'œuvre de la sculpture gothique du XIIe siècle et offre la plus ancienne représentation conservée du couronnement et de la dormition de la Vierge. La flèche sud, construite au milieu du XIIIe siècle, est admirée pour sa hardiesse et son élégance, et influence la construction de plusieurs clochers dans la région."
+      "Incendie et reconstruction. En 1504, la foudre frappe la charpente, provoquant un incendie qui détruit les voûtes. Louis XII et François Ier financent la reconstruction des parties hautes, surélevées de 6 mètres, et le doublement des bas-côtés de la nef. Les façades latérales sont alors ornées d\'un riche décor flamboyant. Le transept est reconstruit par Martin Chambiges au XVIe siècle, ce qui place Notre-Dame de Senlis parmi les plus belles cathédrales de France.",
+    ],
+    chiffres: [
+      { label: 'Hauteur des voûtes', value: '24 m', icon: '📐' },
+      { label: 'Début des travaux', value: '1151', icon: '⚒️' },
+      { label: '', value: 'Gothique primitif et rayonnant', icon: '🏛️' },
+      { label: 'La flèche culmine à ', value: '78,5 m', icon: '&#128508;' }
+    ],
+    curiosites: [
+      "Le tympan de Senlis nous offre la plus ancienne représentation qui ait été conservée du couronnement et de la dormition de la Vierge.",
+      ".",
+      "."
+    ]
   },
   {
     id: 'soissons',
