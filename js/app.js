@@ -6,7 +6,7 @@ if ('serviceWorker' in navigator) {
 /* ===== DEMO MODE ===== */
 // Passer à false pour tout afficher
 const DEMO_MODE = true;
-const DEMO_VISIBLE = ['amiens', 'beauvais'];
+const DEMO_VISIBLE = ['amiens', 'beauvais','senlis-noyon'];
 
 const VELO_TRAJETS = [
   { id: 'beauvais-senlis', fromId: 'beauvais', toId: 'senlis', distance: '~56 km' },
