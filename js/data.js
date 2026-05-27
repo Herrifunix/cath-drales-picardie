@@ -168,8 +168,8 @@ const CATHEDRALS = [
     ],
     curiosites: [
       "Le tympan de Senlis nous offre la plus ancienne représentation qui ait été conservée du couronnement et de la dormition de la Vierge.",
-      ".",
-      "."
+      "La cathédrale compte parmi les premiers grands édifices gothiques de France, avec un transept encore très proche de l'art roman et une nef d'une grande sobriété.",
+      "Son portail occidental est souvent cité comme un jalon important de la sculpture gothique primitive, par la finesse des voussures et la qualité du décor sculpté."
     ]
   },
   {
