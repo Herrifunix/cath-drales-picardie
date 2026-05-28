@@ -11,107 +11,6 @@
 
 const CATHEDRALS = [
   {
-    id: 'beauvais',
-    name: 'Cathédrale Saint-Pierre de Beauvais',
-    city: 'Beauvais',
-    lat: 49.4326,
-    lng: 2.0815,
-    emoji: '⛪',
-    shortDesc: "Chef-d'œuvre gothique inachevé, la cathédrale de Beauvais impressionne par son chœur le plus haut de la chrétienté (48 mètres) et ses deux horloges astronomiques.",
-    description: "Chef-d'œuvre gothique inachevé, la cathédrale de Beauvais impressionne par son chœur le plus haut de la chrétienté (48 mètres) et ses deux horloges astronomiques. Symbole d'audace, sa construction, marquée par des effondrements, témoigne de la quête de transcendance des bâtisseurs.",
-    presentationTitle: 'Présentation',
-    presentationImage: './img/cathedrale_beauvais.jpg',
-    presentationCreditHtml: 'Crédit : Par <a href="//commons.wikimedia.org/wiki/User:Baidax" title="User:Baidax">Baidax</a> — <span class="int-own-work" lang="fr">Travail personnel</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=94632818">Lien</a>',
-    address: 'Rue Saint-Pierre, 60000 BEAUVAIS',
-    horairesNote: "L'Association Beauvais Cathédrale ouvre la cathédrale tous les jours de l'année (sauf exception).",
-    horaires: [
-      { periode: 'Du 1ᵉʳ novembre au 31 mars', detail: 'Tous les jours de 10 h à 12 h 15 et de 14 h 00 à 17 h 15' },
-      { periode: 'Du 1ᵉʳ avril au 31 octobre', detail: 'Tous les jours de 10 h à 18 h 15' }
-    ],
-    services: [
-      "Son et lumière de l'horloge astronomique Vérité",
-      "Location d'audio guides",
-      'Accès PMR'
-    ],
-    associationText: '',
-    website: 'https://cathedrale-beauvais.fr',
-    donUrl: 'https://www.helloasso.com/associations/association-beauvais-cathedrale/formulaires/1',
-    adhesionUrl: 'https://www.helloasso.com/associations/association-beauvais-cathedrale/adhesions/adhesion-classique',
-    phone: '03 44 48 11 60',
-    centerServicesLinks: true,
-    // Remplacer null par l'URL Google Calendar embed (voir les instructions en haut du fichier)
-    agendaCalendarUrl: 'https://calendar.google.com/calendar/embed?src=7cathedralesdepicardie%40gmail.com&ctz=Europe%2FParis',
-    histoire: [
-      "Commencée en 1225 sous l'impulsion de l'évêque-comte Milon de Nanteuil, la cathédrale Saint-Pierre devait être la plus haute du monde chrétien. La construction du chœur gothique, achevée vers 1272, atteint une hauteur de voûte de 48 mètres, un défi technique sans précédent pour l'époque.",
-      "En 1284, un premier effondrement partiel des voûtes contraint les bâtisseurs à revoir entièrement la structure : les arcs-boutants sont doublés, les piles renforcées et des piliers intermédiaires, plus étroits, sont ajoutés pour diviser les travées existantes. Les travaux, ralentis par la guerre de Cent Ans et la peste, ne reprennent qu'autour de 1500. Le transept est finalement élevé au XVIe siècle, dans un style gothique flamboyant d'une grande richesse décorative.",
-      "En 1573, la flèche centrale tour-lanterne, conçue pour rivaliser avec Saint-Pierre de Rome, s'effondre à son tour, quelques années après son achèvement, stoppant définitivement toute velléité de construction de la nef. La cathédrale reste ainsi inachevée, avec seulement une travée de nef, mais ce fragment demeure l'un des chefs-d'œuvre absolus de l'architecture médiévale. Cet inachèvement a aussi permis de préserver une partie de l'ancienne cathédrale carolingienne, vestige inestimable du Xe siècle."
-    ],
-    chiffres: [
-      { label: 'Hauteur des voûtes', value: '48 m', icon: '📐' },
-      { label: 'Cadrans (horloge Vérité)', value: '53', icon: '🕰️' },
-      { label: 'Début des travaux', value: '1225', icon: '⚒️' },
-      { label: 'rayonnant et flamboyant', value: 'Gothique', icon: '🏛️' },
-      { label: 'Horloges astronomiques', value: '2', icon: '⏳' }
-    ],
-    curiosites: [
-      "La cathédrale accueille deux horloges astronomiques : l'horloge astronomique Vérité du XIXe siècle, l'une des plus complexes du monde (53 cadrans et 90 000 pièces), et l'horloge du chanoine Musique du XIVe siècle.",
-      "Les vitraux s'échelonnent du XIIIe au XXe siècle. Les vitraux flamboyants des fenêtres hautes du XVIe siècle baignent le chœur d'une lumière colorée unique en Picardie.",
-      "Faute de nef, la cathédrale a utilisé l'ancien transept de la cathédrale carolingienne comme entrée, une singularité architecturale qui lui vaut son plan en forme de T."
-    ]
-  },
-  {
-    id: 'amiens',
-    name: 'Cathédrale Notre-Dame d\'Amiens',
-    city: 'Amiens',
-    lat: 49.8941,
-    lng: 2.3018,
-    emoji: '⛪',
-    shortDesc: "Plus vaste cathédrale de France, Notre-Dame d'Amiens est un chef-d'œuvre du gothique classique, inscrite au patrimoine mondial de l'UNESCO.",
-    description: "Plus vaste cathédrale de France par ses volumes intérieurs, Notre-Dame d'Amiens est un chef-d'œuvre du gothique classique. Inscrite au patrimoine mondial de l'UNESCO, elle fascine par sa façade ornée de plus de 3 000 statues et son élévation harmonieuse. Sa nef immense (42,3 m de haut, 145 m de long) en fait un joyau de l'architecture médiévale.",
-    presentationTitle: 'Présentation',
-    presentationImage: './img/cathedrale_amiens.jpg',
-    address: '30 Place Notre-Dame, 80000 AMIENS',
-    horaires: [
-      { periode: 'Toute l\'année', detail: 'Tous les jours de 8 h 30 à 17 h 15 (18 h 15 d\'avril à septembre)' }
-    ],
-    services: [
-      'Spectacle de polychromie (été et décembre)',
-      'Audio guide',
-      'Accès PMR'
-    ],
-    phone: '',
-    associationText: '',
-    website: 'https://www.cathedrale-amiens.fr',
-    donUrl: 'https://www.amiscathedralesenlis.fr/comment-nous-aider',
-    adhesionUrl: 'https://boutique.macotisation.fr/collect/Les-Amis-de-la-Cathedrale-de-Senlis/Cotisation-2026/5bZprajK',
-    agendaCalendarUrl: 'https://calendar.google.com/calendar/embed?src=7cathedralesdepicardie%40gmail.com&ctz=Europe%2FParis'
-  },
-  {
-    id: 'laon',
-    name: 'Cathédrale Notre-Dame de Laon',
-    city: 'Laon',
-    lat: 49.5637,
-    lng: 3.6241,
-    emoji: '🐂',
-    shortDesc: "Perchée sur sa colline, la cathédrale de Laon est un chef-d'œuvre du premier art gothique, célèbre pour ses tours ornées de bœufs sculptés.",
-    description: "Perchée sur sa colline fortifiée, la cathédrale Notre-Dame de Laon est l'un des plus beaux témoignages du premier art gothique. Construite entre 1155 et 1235, elle est célèbre pour ses cinq tours (à l'origine sept) ornées de seize bœufs sculptés grandeur nature, hommage aux animaux qui ont transporté les pierres. Sa nef lumineuse à quatre niveaux d'élévation en fait un modèle architectural majeur.",
-    address: 'Rue du Cloître, 02000 LAON',
-    horaires: [
-      { periode: 'Toute l\'année', detail: 'Tous les jours de 8 h 30 à 18 h 30 (17 h en hiver)' }
-    ],
-    services: [
-      'Visites guidées des tours',
-      'Audio guide',
-      'Accès PMR partiel'
-    ],
-    website: '',
-    phone: '',
-    associationText: '',
-    donUrl: '',
-    adhesionUrl: '',
-    agendaCalendarUrl: '',
-  },
-  {
     id: 'noyon',
     name: 'Cathédrale Notre-Dame de Noyon',
     city: 'Noyon',
@@ -174,6 +73,7 @@ const CATHEDRALS = [
     ],
     chiffres: [
       { label: 'Hauteur des voûtes', value: '24 m', icon: '📐' },
+      { label: 'Longueur', value: '70 m', icon: '📐' },
       { label: 'Début des travaux', value: '1151', icon: '⚒️' },
       { label: 'primitif et rayonnant', value: 'Gothique', icon: '🏛️' },
       { label: 'Hauteur flèche', value: '78,5 m', icon: '&#128508;' }
@@ -182,6 +82,31 @@ const CATHEDRALS = [
       "Le tympan de Senlis nous offre la plus ancienne représentation qui ait été conservée du couronnement et de la dormition de la Vierge.",
       "La flèche culmine à 78,5 m."
     ]
+  },
+   {
+    id: 'laon',
+    name: 'Cathédrale Notre-Dame de Laon',
+    city: 'Laon',
+    lat: 49.5637,
+    lng: 3.6241,
+    emoji: '🐂',
+    shortDesc: "Perchée sur sa colline, la cathédrale de Laon est un chef-d'œuvre du premier art gothique, célèbre pour ses tours ornées de bœufs sculptés.",
+    description: "Perchée sur sa colline fortifiée, la cathédrale Notre-Dame de Laon est l'un des plus beaux témoignages du premier art gothique. Construite entre 1155 et 1235, elle est célèbre pour ses cinq tours (à l'origine sept) ornées de seize bœufs sculptés grandeur nature, hommage aux animaux qui ont transporté les pierres. Sa nef lumineuse à quatre niveaux d'élévation en fait un modèle architectural majeur.",
+    address: 'Rue du Cloître, 02000 LAON',
+    horaires: [
+      { periode: 'Toute l\'année', detail: 'Tous les jours de 8 h 30 à 18 h 30 (17 h en hiver)' }
+    ],
+    services: [
+      'Visites guidées des tours',
+      'Audio guide',
+      'Accès PMR partiel'
+    ],
+    website: '',
+    phone: '',
+    associationText: '',
+    donUrl: '',
+    adhesionUrl: '',
+    agendaCalendarUrl: '',
   },
   {
     id: 'soissons',
@@ -232,5 +157,81 @@ const CATHEDRALS = [
     donUrl: '',
     adhesionUrl: '',
     agendaCalendarUrl: '',
+  },
+   {
+    id: 'amiens',
+    name: 'Cathédrale Notre-Dame d\'Amiens',
+    city: 'Amiens',
+    lat: 49.8941,
+    lng: 2.3018,
+    emoji: '⛪',
+    shortDesc: "Plus vaste cathédrale de France, Notre-Dame d'Amiens est un chef-d'œuvre du gothique classique, inscrite au patrimoine mondial de l'UNESCO.",
+    description: "Plus vaste cathédrale de France par ses volumes intérieurs, Notre-Dame d'Amiens est un chef-d'œuvre du gothique classique. Inscrite au patrimoine mondial de l'UNESCO, elle fascine par sa façade ornée de plus de 3 000 statues et son élévation harmonieuse. Sa nef immense (42,3 m de haut, 145 m de long) en fait un joyau de l'architecture médiévale.",
+    presentationTitle: 'Présentation',
+    presentationImage: './img/cathedrale_amiens.jpg',
+    address: '30 Place Notre-Dame, 80000 AMIENS',
+    horaires: [
+      { periode: 'Toute l\'année', detail: 'Tous les jours de 8 h 30 à 17 h 15 (18 h 15 d\'avril à septembre)' }
+    ],
+    services: [
+      'Spectacle de polychromie (été et décembre)',
+      'Audio guide',
+      'Accès PMR'
+    ],
+    phone: '',
+    associationText: '',
+    website: 'https://www.cathedrale-amiens.fr',
+    donUrl: 'https://www.amiscathedralesenlis.fr/comment-nous-aider',
+    adhesionUrl: 'https://boutique.macotisation.fr/collect/Les-Amis-de-la-Cathedrale-de-Senlis/Cotisation-2026/5bZprajK',
+    agendaCalendarUrl: 'https://calendar.google.com/calendar/embed?src=7cathedralesdepicardie%40gmail.com&ctz=Europe%2FParis'
+  },
+  {
+    id: 'beauvais',
+    name: 'Cathédrale Saint-Pierre de Beauvais',
+    city: 'Beauvais',
+    lat: 49.4326,
+    lng: 2.0815,
+    emoji: '⛪',
+    shortDesc: "Chef-d'œuvre gothique inachevé, la cathédrale de Beauvais impressionne par son chœur le plus haut de la chrétienté (48 mètres) et ses deux horloges astronomiques.",
+    description: "Chef-d'œuvre gothique inachevé, la cathédrale de Beauvais impressionne par son chœur le plus haut de la chrétienté (48 mètres) et ses deux horloges astronomiques. Symbole d'audace, sa construction, marquée par des effondrements, témoigne de la quête de transcendance des bâtisseurs.",
+    presentationTitle: 'Présentation',
+    presentationImage: './img/cathedrale_beauvais.jpg',
+    presentationCreditHtml: 'Crédit : Par <a href="//commons.wikimedia.org/wiki/User:Baidax" title="User:Baidax">Baidax</a> — <span class="int-own-work" lang="fr">Travail personnel</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=94632818">Lien</a>',
+    address: 'Rue Saint-Pierre, 60000 BEAUVAIS',
+    horairesNote: "L'Association Beauvais Cathédrale ouvre la cathédrale tous les jours de l'année (sauf exception).",
+    horaires: [
+      { periode: 'Du 1ᵉʳ novembre au 31 mars', detail: 'Tous les jours de 10 h à 12 h 15 et de 14 h 00 à 17 h 15' },
+      { periode: 'Du 1ᵉʳ avril au 31 octobre', detail: 'Tous les jours de 10 h à 18 h 15' }
+    ],
+    services: [
+      "Son et lumière de l'horloge astronomique Vérité",
+      "Location d'audio guides",
+      'Accès PMR'
+    ],
+    associationText: '',
+    website: 'https://cathedrale-beauvais.fr',
+    donUrl: 'https://www.helloasso.com/associations/association-beauvais-cathedrale/formulaires/1',
+    adhesionUrl: 'https://www.helloasso.com/associations/association-beauvais-cathedrale/adhesions/adhesion-classique',
+    phone: '03 44 48 11 60',
+    centerServicesLinks: true,
+    // Remplacer null par l'URL Google Calendar embed (voir les instructions en haut du fichier)
+    agendaCalendarUrl: 'https://calendar.google.com/calendar/embed?src=7cathedralesdepicardie%40gmail.com&ctz=Europe%2FParis',
+    histoire: [
+      "Commencée en 1225 sous l'impulsion de l'évêque-comte Milon de Nanteuil, la cathédrale Saint-Pierre devait être la plus haute du monde chrétien. La construction du chœur gothique, achevée vers 1272, atteint une hauteur de voûte de 48 mètres, un défi technique sans précédent pour l'époque.",
+      "En 1284, un premier effondrement partiel des voûtes contraint les bâtisseurs à revoir entièrement la structure : les arcs-boutants sont doublés, les piles renforcées et des piliers intermédiaires, plus étroits, sont ajoutés pour diviser les travées existantes. Les travaux, ralentis par la guerre de Cent Ans et la peste, ne reprennent qu'autour de 1500. Le transept est finalement élevé au XVIe siècle, dans un style gothique flamboyant d'une grande richesse décorative.",
+      "En 1573, la flèche centrale tour-lanterne, conçue pour rivaliser avec Saint-Pierre de Rome, s'effondre à son tour, quelques années après son achèvement, stoppant définitivement toute velléité de construction de la nef. La cathédrale reste ainsi inachevée, avec seulement une travée de nef, mais ce fragment demeure l'un des chefs-d'œuvre absolus de l'architecture médiévale. Cet inachèvement a aussi permis de préserver une partie de l'ancienne cathédrale carolingienne, vestige inestimable du Xe siècle."
+    ],
+    chiffres: [
+      { label: 'Hauteur des voûtes', value: '48 m', icon: '📐' },
+      { label: 'Cadrans (horloge Vérité)', value: '53', icon: '🕰️' },
+      { label: 'Début des travaux', value: '1225', icon: '⚒️' },
+      { label: 'rayonnant et flamboyant', value: 'Gothique', icon: '🏛️' },
+      { label: 'Horloges astronomiques', value: '2', icon: '⏳' }
+    ],
+    curiosites: [
+      "La cathédrale accueille deux horloges astronomiques : l'horloge astronomique Vérité du XIXe siècle, l'une des plus complexes du monde (53 cadrans et 90 000 pièces), et l'horloge du chanoine Musique du XIVe siècle.",
+      "Les vitraux s'échelonnent du XIIIe au XXe siècle. Les vitraux flamboyants des fenêtres hautes du XVIe siècle baignent le chœur d'une lumière colorée unique en Picardie.",
+      "Faute de nef, la cathédrale a utilisé l'ancien transept de la cathédrale carolingienne comme entrée, une singularité architecturale qui lui vaut son plan en forme de T."
+    ]
   }
-];
+ ];
