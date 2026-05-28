@@ -79,8 +79,8 @@ const CATHEDRALS = [
       'Accès PMR'
     ],
     website: 'https://www.cathedrale-amiens.fr',
-    donUrl: null,
-    adhesionUrl: null,
+    donUrl: 'https://www.amiscathedralesenlis.fr/comment-nous-aider',
+    adhesionUrl: 'https://boutique.macotisation.fr/collect/Les-Amis-de-la-Cathedrale-de-Senlis/Cotisation-2026/5bZprajK',
     agendaCalendarUrl: 'https://calendar.google.com/calendar/embed?src=7cathedralesdepicardie%40gmail.com&ctz=Europe%2FParis'
   },
   {
@@ -136,29 +136,32 @@ const CATHEDRALS = [
     lat: 49.2068,
     lng: 2.5856,
     emoji: '👑',
-    shortDesc: "La cathédrale de Senlis est l\’une des plus petites de France : 70 m de longueur pour 24 m sous voûte ! Construite sur quatre siècles, elle est un exemple parfait de l\’évolution du style gothique du primitif au rayonnant.",
-    description: "La cathédrale de Senlis est l\’une des plus petites de France : 70 m de longueur pour 24 m sous voûte ! Construite sur quatre siècles, elle est un exemple parfait de l\’évolution du style gothique du primitif au rayonnant.",
+    shortDesc: "La Cathédrale de Senlis est une des toutes premières cathédrales de France. Les travaux débutent en 1151 et elle est consacrée le 16 juin 1 191 Construite sur quatre siècles, elle est un exemple parfait de l\’évolution du style gothique du primitif au rayonnant.",
+    description: "La Cathédrale de Senlis est une des toutes premières cathédrales de France. Les travaux débutent en 1151 et elle est consacrée le 16 juin 1 191 Construite sur quatre siècles, elle est un exemple parfait de l\’évolution du style gothique du primitif au rayonnant.",
     presentationTitle: 'Présentation',
     presentationImage: './img/cathedrale-senlis.jpg',
     presentationCreditHtml: 'François Chapuis',
     
     address: 'Place du Parvis Notre-Dame, 60300 SENLIS',
     horaires: [
-      { periode: 'Toute l\'année', detail: 'Tous les jours de 8 h à 18 h 30' }
+      { periode: 'Toute l\'année', detail: 'Tous les jours de 8 h 00 à 19 h 00' }
     ],
     services: [
       'Visite libre',
       'Concerts réguliers'
     ],
-    website: null,
+    website: 'https://www.amiscathedralesenlis.fr/',
     donUrl: null,
     adhesionUrl: null,
     agendaCalendarUrl: null,
 
     histoire: [
-      "Origines et début de la construction. La cathédrale est édifiée à partir de 1151 sur l\'emplacement de sanctuaires plus anciens, sous l\'impulsion de l\'évêque Pierre (1134-1151) et avec le soutien du roi Louis VII. Senlis, ville royale à l\'époque, connaît alors un âge d\'or. Les travaux débutent simultanément aux deux extrémités de l\'édifice : le chœur et la façade occidentale sont achevés vers 1167, et la nef est raccordée au chœur en 1175. La cathédrale est consacrée le 16 juin 1191, mais elle ne possède pas encore de transept, ce qui la rend rapidement démodée face à l\'évolution rapide de l\'architecture gothique.",
-      "Évolution et style gothique. La cathédrale de Senlis est un exemple parfait de l\'évolution du style gothique, du primitif au rayonnant. Son portail occidental, réalisé dans les années 1160-1170, est l\'un des chefs-d\'œuvre de la sculpture gothique du XIIe siècle et offre la plus ancienne représentation conservée du couronnement et de la dormition de la Vierge. La flèche sud, construite au milieu du XIIIe siècle, est admirée pour sa hardiesse et son élégance, et influence la construction de plusieurs clochers dans la région.",
-      "Incendie et reconstruction. En 1504, la foudre frappe la charpente, provoquant un incendie qui détruit les voûtes. Louis XII et François Ier financent la reconstruction des parties hautes, surélevées de 6 mètres, et le doublement des bas-côtés de la nef. Les façades latérales sont alors ornées d\'un riche décor flamboyant. Le transept est reconstruit par Martin Chambiges au XVIe siècle, ce qui place Notre-Dame de Senlis parmi les plus belles cathédrales de France."
+      "Origines et début de la construction.",
+      "La cathédrale est édifiée à partir de 1151 sur l\'emplacement de sanctuaires plus anciens, sous l\'impulsion de l\'évêque Pierre (1134-1151) et avec le soutien du roi Louis VII. Senlis, ville royale à l\'époque, connaît alors un âge d\'or. Les travaux débutent simultanément aux deux extrémités de l\'édifice : le chœur et la façade occidentale sont achevés vers 1167, et la nef est raccordée au chœur en 1175. La cathédrale est consacrée le 16 juin 1191, mais elle ne possède pas encore de transept, ce qui la rend rapidement démodée face à l\'évolution rapide de l\'architecture gothique.",
+      "Évolution et style gothique.",
+      "La cathédrale de Senlis est un exemple parfait de l\'évolution du style gothique, du primitif au rayonnant. Son portail occidental, réalisé dans les années 1160-1170, est l\'un des chefs-d\'œuvre de la sculpture gothique du XIIe siècle et offre la plus ancienne représentation conservée du couronnement et de la dormition de la Vierge. La flèche sud, construite au milieu du XIIIe siècle, est admirée pour sa hardiesse et son élégance, et influence la construction de plusieurs clochers dans la région.",
+      "Incendie et reconstruction.",
+      "En 1504, la foudre frappe la charpente, provoquant un incendie qui détruit les voûtes. Louis XII et François Ier financent la reconstruction des parties hautes, surélevées de 6 mètres, et le doublement des bas-côtés de la nef. Les façades latérales sont alors ornées d\'un riche décor flamboyant. Le transept est reconstruit par Martin Chambiges au XVIe siècle, ce qui place Notre-Dame de Senlis parmi les plus belles cathédrales de France."
     ],
     chiffres: [
       { label: 'Hauteur des voûtes', value: '24 m', icon: '📐' },
@@ -168,8 +171,7 @@ const CATHEDRALS = [
     ],
     curiosites: [
       "Le tympan de Senlis nous offre la plus ancienne représentation qui ait été conservée du couronnement et de la dormition de la Vierge.",
-      "La cathédrale compte parmi les premiers grands édifices gothiques de France, avec un transept encore très proche de l'art roman et une nef d'une grande sobriété.",
-      "Son portail occidental est souvent cité comme un jalon important de la sculpture gothique primitive, par la finesse des voussures et la qualité du décor sculpté."
+      "La flèche culmine à 78,5 m."
     ]
   },
   {
