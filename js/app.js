@@ -12,7 +12,7 @@ const VELO_TRAJETS = [
   { id: 'beauvais-senlis', fromId: 'beauvais', toId: 'senlis', distance: '~56 km' },
   { id: 'senlis-noyon', fromId: 'senlis', toId: 'noyon', distance: '~60 km' },
   { id: 'noyon-laon', fromId: 'noyon', toId: 'laon', distance: '~52 km' },
-  { id: 'laon-saint-quentin', fromId: 'laon', toId: 'saint-quentin', distance: '~45 km' },
+  { id: 'laon-soisons', fromId: 'laon', toId: 'soins', distance: '~45 km' },
   { id: 'saint-quentin-soissons', fromId: 'saint-quentin', toId: 'soissons', distance: '~60 km' },
   { id: 'soissons-amiens', fromId: 'soissons', toId: 'amiens', distance: '~95 km' },
   { id: 'beauvais-amiens', fromId: 'beauvais', toId: 'amiens', distance: '~68 km' }
