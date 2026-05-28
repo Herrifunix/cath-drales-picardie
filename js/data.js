@@ -49,7 +49,7 @@ const CATHEDRALS = [
       { label: 'Hauteur des voûtes', value: '48 m', icon: '📐' },
       { label: 'Cadrans (horloge Vérité)', value: '53', icon: '🕰️' },
       { label: 'Début des travaux', value: '1225', icon: '⚒️' },
-      { label: 'Gothique rayonnant et flamboyant', value: 'Style', icon: '🏛️' },
+      { label: 'rayonnant et flamboyant', value: 'Gothique', icon: '🏛️' },
       { label: 'Horloges astronomiques', value: '2', icon: '⏳' }
     ],
     curiosites: [
