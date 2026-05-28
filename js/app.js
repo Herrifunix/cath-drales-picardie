@@ -8,16 +8,6 @@ if ('serviceWorker' in navigator) {
 const DEMO_MODE = false;
 const DEMO_VISIBLE = ['amiens', 'beauvais', 'senlis'];
 
-const VELO_TRAJETS = [
-  { id: 'beauvais-senlis', fromId: 'beauvais', toId: 'senlis', distance: '~56 km' },
-  { id: 'senlis-noyon', fromId: 'senlis', toId: 'noyon', distance: '~60 km' },
-  { id: 'noyon-laon', fromId: 'noyon', toId: 'laon', distance: '~52 km' },
-  { id: 'laon-soisons', fromId: 'laon', toId: 'soins', distance: '~45 km' },
-  { id: 'saint-quentin-soissons', fromId: 'saint-quentin', toId: 'soissons', distance: '~60 km' },
-  { id: 'soissons-amiens', fromId: 'soissons', toId: 'amiens', distance: '~95 km' },
-  { id: 'beauvais-amiens', fromId: 'beauvais', toId: 'amiens', distance: '~68 km' }
-];
-
 /* ===== INSTALL (optionnel) ===== */
 let deferredPrompt = null;
 
@@ -129,12 +119,24 @@ function getTrajetLabel(trajet) {
 }
 
 function getTrajetGpxCandidates(trajet) {
-  const from = getCathedralById(trajet.fromId)?.city || trajet.fromId;
-  const to = getCathedralById(trajet.toId)?.city || trajet.toId;
-  return [
-    `./gpx/Gpx ${from} ${to} .gpx`,
-    `./gpx/Gpx ${from} ${to}.gpx`
-  ];
+  const fromCity = getCathedralById(trajet.fromId)?.city || trajet.fromId;
+  const toCity = getCathedralById(trajet.toId)?.city || trajet.toId;
+  
+  const fromVariations = [fromCity, fromCity.toLowerCase(), fromCity.toUpperCase()];
+  const toVariations = [toCity, toCity.toLowerCase(), toCity.toUpperCase()];
+  
+  const candidates = [];
+  for(const f of fromVariations) {
+    for(const t of toVariations) {
+      candidates.push(`./gpx/gpx ${f} ${t} .gpx`);
+      candidates.push(`./gpx/Gpx ${f} ${t} .gpx`);
+      candidates.push(`./gpx/GPX ${f} ${t} .gpx`);
+      candidates.push(`./gpx/gpx ${f} ${t}.gpx`);
+      candidates.push(`./gpx/Gpx ${f} ${t}.gpx`);
+      candidates.push(`./gpx/GPX ${f} ${t}.gpx`);
+    }
+  }
+  return [...new Set(candidates)];
 }
 
 function haversineDistanceKm(a, b) {
@@ -225,11 +227,22 @@ async function fetchTrajetGpx(trajet) {
 }
 
 async function findAvailableVeloTrajets() {
+  const allTrajets = [];
+  for (let i = 0; i < CATHEDRALS.length; i++) {
+    for (let j = i + 1; j < CATHEDRALS.length; j++) {
+      const from = CATHEDRALS[i].id;
+      const to = CATHEDRALS[j].id;
+      allTrajets.push({ id: from + '-' + to, fromId: from, toId: to });
+      allTrajets.push({ id: to + '-' + from, fromId: to, toId: from });
+    }
+  }
+
   const results = await Promise.all(
-    VELO_TRAJETS.map(async (trajet) => {
+    allTrajets.map(async (trajet) => {
       const loaded = await fetchTrajetGpx(trajet);
       if (loaded?.url && loaded?.points?.length > 1) {
-        return { ...trajet, gpxUrl: loaded.url, points: loaded.points, stats: loaded.stats };
+        const distKm = Math.round(loaded.stats.distanceKm);
+        return { ...trajet, distance: `~${distKm} km`, gpxUrl: loaded.url, points: loaded.points, stats: loaded.stats };
       }
       return null;
     })
@@ -519,20 +532,15 @@ function renderDetail(c) {
     servicesHtml = '<ul>' + c.services.map(s => `<li>${s}</li>`).join('') + '</ul>';
   }
 
-  let linksHtml = '';
-  const serviceLinkClass = c.centerServicesLinks ? 'detail-link centered' : 'detail-link';
+  let associationLinksHtml = '';
+  const asassoLinkClass = c.centerServicesLinks ? 'detail-link centered' : 'detail-link';
   if (c.website) {
-    linksHtml += `<a href="${encodeURI(c.website)}" target="_blank" rel="noopener noreferrer" class="${serviceLinkClass}">
+    associationLinksHtml += `<a href="${encodeURI(c.website)}" target="_blank" rel="noopener noreferrer" class="${asassoLinkClass}">
       <span class="detail-link-icon">🌐</span> Site officiel
     </a>`;
   }
-  if (c.adhesionUrl) {
-    linksHtml += `<a href="${encodeURI(c.adhesionUrl)}" target="_blank" rel="noopener noreferrer" class="${serviceLinkClass}">
-      <span class="detail-link-icon">🤝</span> Adhérer à l'association
-    </a>`;
-  }
   if (c.phone) {
-    linksHtml += `<a href="tel:${c.phone.replace(/\s+/g, '')}" class="${serviceLinkClass}">
+    associationLinksHtml += `<a href="tel:${c.phone.replace(/\s+/g, '')}" class="${asassoLinkClass}">
       <span class="detail-link-icon">📞</span> ${c.phone}
     </a>`;
   }
@@ -545,8 +553,10 @@ function renderDetail(c) {
       </div>`
     : '';
 
-  const hasServices = !!(servicesHtml || linksHtml);
-  const hasAssociation = !!(c.donUrl || c.adhesionUrl);
+  const hasServices = !!(servicesHtml);
+  const defaultAssoText = "Notre association a pour vocation de valoriser la cathédrale dans une démarche résolument culturelle. Nous animons l\'édifice en veillant à respecter l\'héritage patrimonial qu\'il incarne.\\nVous pouvez soutenir nos actions en faisant un don ou en adhérant.";
+  const associationText = c.associationText ? c.associationText : defaultAssoText;
+  const hasAssociation = !!(c.donUrl || c.adhesionUrl || c.website || c.phone || c.associationText);
   const agendaIframeSrc = buildAgendaIframeSrc(c.agendaCalendarUrl);
   const hasAgenda = !!agendaIframeSrc;
   let associationActionsHtml = '';
@@ -630,15 +640,14 @@ function renderDetail(c) {
     ${hasServices ? `<div id="tab-services" class="detail-tab-panel hidden">
       <div class="detail-section">
         ${servicesHtml}
-        ${linksHtml ? `<div class="detail-links">${linksHtml}</div>` : ''}
       </div>
     </div>` : ''}
 
     ${hasAssociation ? `<div id="tab-association" class="detail-tab-panel hidden">
       <div class="detail-section">
         <h3>🤝 Présentation de l'association</h3>
-        <p>Notre association a pour vocation de valoriser la cathédrale Saint-Pierre, la basse-œuvre et l’église Saint-Étienne de Beauvais, dans une démarche résolument culturelle. Nous animons ces édifices emblématiques en veillant à respecter le culte catholique, conformément à la loi du 9 décembre 1905, ainsi que l’héritage patrimonial qu’ils incarnent.</p>
-        <p>Vous pouvez soutenir nos actions en faisant un don ou en adhérant.</p>
+        <p>${associationText.replace(/\\n/g, '<br>')}</p>
+        ${associationLinksHtml ? `<div class="detail-links" style="margin-top: 1rem;">${associationLinksHtml}</div>` : ''}
         <div class="association-actions">${associationActionsHtml}</div>
       </div>
     </div>` : ''}

@@ -33,6 +33,7 @@ const CATHEDRALS = [
       "Location d'audio guides",
       'Accès PMR'
     ],
+    associationText: '',
     website: 'https://cathedrale-beauvais.fr',
     donUrl: 'https://www.helloasso.com/associations/association-beauvais-cathedrale/formulaires/1',
     adhesionUrl: 'https://www.helloasso.com/associations/association-beauvais-cathedrale/adhesions/adhesion-classique',
@@ -78,6 +79,8 @@ const CATHEDRALS = [
       'Audio guide',
       'Accès PMR'
     ],
+    phone: '',
+    associationText: '',
     website: 'https://www.cathedrale-amiens.fr',
     donUrl: 'https://www.amiscathedralesenlis.fr/comment-nous-aider',
     adhesionUrl: 'https://boutique.macotisation.fr/collect/Les-Amis-de-la-Cathedrale-de-Senlis/Cotisation-2026/5bZprajK',
@@ -101,10 +104,12 @@ const CATHEDRALS = [
       'Audio guide',
       'Accès PMR partiel'
     ],
-    website: null,
-    donUrl: null,
-    adhesionUrl: null,
-    agendaCalendarUrl: null
+    website: '',
+    phone: '',
+    associationText: '',
+    donUrl: '',
+    adhesionUrl: '',
+    agendaCalendarUrl: '',
   },
   {
     id: 'noyon',
@@ -124,10 +129,12 @@ const CATHEDRALS = [
       'Audio guide',
       'Accès PMR'
     ],
-    website: null,
-    donUrl: null,
-    adhesionUrl: null,
-    agendaCalendarUrl: null
+    website: '',
+    phone: '',
+    associationText: '',
+    donUrl: '',
+    adhesionUrl: '',
+    agendaCalendarUrl: '',
   },
   {
     id: 'senlis',
@@ -150,6 +157,8 @@ const CATHEDRALS = [
       'Visite libre',
       'Concerts réguliers'
     ],
+    phone: '',
+    associationText: '',
     website: 'https://www.amiscathedralesenlis.fr/',
     donUrl: 'https://www.amiscathedralesenlis.fr/comment-nous-aider',
     adhesionUrl: 'https://boutique.macotisation.fr/collect/Les-Amis-de-la-Cathedrale-de-Senlis/Cotisation-2026/5bZprajK',
@@ -192,10 +201,12 @@ const CATHEDRALS = [
       'Tableau de Rubens',
       'Accès PMR'
     ],
-    website: null,
-    donUrl: null,
-    adhesionUrl: null,
-    agendaCalendarUrl: null
+    website: '',
+    phone: '',
+    associationText: '',
+    donUrl: '',
+    adhesionUrl: '',
+    agendaCalendarUrl: '',
   },
   {
     id: 'saint-quentin',
@@ -215,9 +226,11 @@ const CATHEDRALS = [
       'Visite guidée',
       'Accès PMR'
     ],
-    website: null,
-    donUrl: null,
-    adhesionUrl: null,
-    agendaCalendarUrl: null
+    website: '',
+    phone: '',
+    associationText: '',
+    donUrl: '',
+    adhesionUrl: '',
+    agendaCalendarUrl: '',
   }
 ];
