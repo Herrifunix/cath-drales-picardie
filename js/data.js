@@ -166,8 +166,8 @@ const CATHEDRALS = [
     chiffres: [
       { label: 'Hauteur des voûtes', value: '24 m', icon: '📐' },
       { label: 'Début des travaux', value: '1151', icon: '⚒️' },
-      { label: '', value: 'Gothique primitif et rayonnant', icon: '🏛️' },
-      { label: 'La flèche culmine à ', value: '78,5 m', icon: '&#128508;' }
+      { label: 'primitif et rayonnant', value: 'Gothique', icon: '🏛️' },
+      { label: 'Hauteur flèche', value: '78,5 m', icon: '&#128508;' }
     ],
     curiosites: [
       "Le tympan de Senlis nous offre la plus ancienne représentation qui ait été conservée du couronnement et de la dormition de la Vierge.",
