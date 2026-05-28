@@ -151,8 +151,8 @@ const CATHEDRALS = [
       'Concerts réguliers'
     ],
     website: 'https://www.amiscathedralesenlis.fr/',
-    donUrl: null,
-    adhesionUrl: null,
+    donUrl: 'https://www.amiscathedralesenlis.fr/comment-nous-aider',
+    adhesionUrl: 'https://boutique.macotisation.fr/collect/Les-Amis-de-la-Cathedrale-de-Senlis/Cotisation-2026/5bZprajK',
     agendaCalendarUrl: null,
 
     histoire: [
